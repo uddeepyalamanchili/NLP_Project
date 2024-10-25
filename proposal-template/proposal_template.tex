@@ -1,0 +1,135 @@
+%
+% File proposal_template.tex
+%
+%% Based on the style files for ACL 2018, NAACL 2018/19, which were
+%% Based on the style files for ACL-2015, with some improvements
+%%  taken from the NAACL-2016 style
+%% Based on the style files for ACL-2014, which were, in turn,
+%% based on ACL-2013, ACL-2012, ACL-2011, ACL-2010, ACL-IJCNLP-2009,
+%% EACL-2009, IJCNLP-2008...
+%% Based on the style files for EACL 2006 by 
+%%e.agirre@ehu.es or Sergi.Balari@uab.es
+%% and that of ACL 08 by Joakim Nivre and Noah Smith
+
+\documentclass[11pt,a4paper]{article}
+\usepackage[hyperref]{acl2019}
+\usepackage{times}
+\usepackage{latexsym}
+
+\usepackage{url}
+
+\aclfinalcopy % Uncomment this line for the final submission
+%\def\aclpaperid{***} %  Enter the acl Paper ID here
+
+%\setlength\titlebox{5cm}
+% You can expand the titlebox if you need extra space
+% to show all the authors. Please do not make the titlebox
+% smaller than 5cm (the original size); we will check this
+% in the camera-ready version and ask you to change it back.
+
+\newcommand\BibTeX{B\textsc{ib}\TeX}
+
+\title{Project Proposal Template}
+
+\author{Uddip Yalamanchili \\
+  Department of Computer Science\\
+  George Mason University, USA \\
+  \texttt{uyalaman@gmu.edu} \\\And
+  Second Author \\
+  Affiliation / Address line 1 \\
+  Affiliation / Address line 2 \\
+  Affiliation / Address line 3 \\
+  \texttt{email@domain} \\}
+
+\date{}
+
+\begin{document}
+\maketitle
+
+\section{Introduction}
+
+\subsection{Task / Research Question Description}
+
+The task is to develop a tool that provides personalized grammar feedback for non-native Hindi learners. The goal is to help learners identify 
+% and correct 
+their grammatical errors, facilitating their journey toward fluency.
+
+\subsection{ Motivation and Limitations of existing work}
+
+Existing resources primarily focus on vocabulary and basic phrases, but they lack personalized grammar feedback. While others have addressed general Hindi language learning, this project aims to offer real-time, individualized feedback that enhances learners' understanding of grammar, which existing solutions do not sufficiently provide. Prior efforts have not been able to cater to personalized grammar refinement, especially for self-directed learners.
+
+\subsection{Proposed Approach}
+
+% Briefly describe some of your initial thoughts about your proposed approach and your preliminary ideas 
+The proposed approach includes integrating rule-based and pre-trained NLP models to detect grammatical errors and provide suggestions. Initial ideas involve using existing public datasets, pre-trained models from platforms like Hugging Face, and machine translation tools. The development of an API that allows users to input sentences and receive corrections and explanations is also planned.
+
+\subsection{Likely challenges and mitigations}
+% What is hard about this task / research question? What are your contingency plans if things turn out to be harder than expected or experiments do not go as planned? 
+Challenges include accurately detecting complex grammatical errors, handling diverse sentence structures, and ensuring the tool's performance. To mitigate these, the project plans to use a combination of rule-based systems and machine learning models. Additionally, there are contingency plans to involve human evaluations and real-world user testing to refine and improve the accuracy of the feedback tool.
+\\
+\underline{should also talk about the challenges about the dataset and also the efforts require to evaluate the performance of the tool.}
+
+\section{Related Work}
+Include 3-4 sentence descriptions of no less than 4 relevant papers (as applicable). Also mention how your work differs from these. Note that prior work should be properly cited in References, e.g., when you use the BERT model \cite{devlin2019bert} you could cite it in this way; if you want to refer to the authors of a certain paper, you should use \texttt{citet}, e.g., "\citet{devlin2019bert} proposed the BERT model." See \url{https://acl-org.github.io/ACLPUB/formatting.html} for instructions.
+
+\section{Methodology}
+
+This section must explain your approach to solving the problem. Remember, that this should ensure that your work is potentially reproducible, so try to be as detailed as possible. You don't need to describe established models/architectures from previous work as long as you appropriately cite the relevant papers. If you use prompt-based techniques, make sure to include your prompts (e.g. in an Appendix) along with the generation configuration.
+
+\subsection{Evaluation} 
+How will you evaluate your system? Will you write unit tests? Will you perform human evaluation, or will you use automatic references, and why?
+
+\section{Experiments}
+
+\subsection{Datasets}
+Please list which datasets you plan to use , whether or not you have access them, and whether or not they are publicly available with the same preprocessing and train / dev / tests as the previous work you will be comparing to (if applicable). If you plan to collect your own dataset, please describe clearly the data plan (the data source, how you plan to collect it, how you would preprocess it for the task, etc.).
+
+\subsection{Implementation} 
+Please provide a link to a repo of your implementation (if applicable) and appropriately cite any resources you have used.
+
+\subsection{Results}
+Provide a table with your results.
+
+\subsection{Discussion}
+Analyze the performance of your model. Discuss any issues you faced. Did you do a sensitivity analysis (e.g. multiple runs with different random seeds)?
+
+\subsection{Resources}
+Discuss the cost of your solution in terms of resources: computation, time, people, development effort.
+
+
+\subsection{Error Analysis}
+Perform an error analysis on the system. Include at least 2-3 instances where your system fails and 2-3 where it succeeds.
+
+
+\section{Conclusion}
+Summarize your contribution in three sentences.
+
+% \section{Credits}
+
+% This document has been adapted from the instructions
+% for earlier ACL and NAACL proceedings,
+% including 
+% those for 
+% NAACL 2019 by Stephanie Lukin and Alla Roskovskaya, 
+% ACL 2018 by Shay Cohen, Kevin Gimpel, and Wei Lu, 
+% NAACL 2018 by Margaret Michell and Stephanie Lukin,
+% 2017/2018 (NA)ACL bibtex suggestions from Jason Eisner,
+% ACL 2017 by Dan Gildea and Min-Yen Kan, 
+% NAACL 2017 by Margaret Mitchell, 
+% ACL 2012 by Maggie Li and Michael White, 
+% those from ACL 2010 by Jing-Shing Chang and Philipp Koehn, 
+% those for ACL 2008 by JohannaD. Moore, Simone Teufel, James Allan, and Sadaoki Furui, 
+% those for ACL 2005 by Hwee Tou Ng and Kemal Oflazer, 
+% those for ACL 2002 by Eugene Charniak and Dekang Lin, 
+% and earlier ACL and EACL formats.
+% Those versions were written by several
+% people, including John Chen, Henry S. Thompson and Donald
+% Walker. Additional elements were taken from the formatting
+% instructions of the \emph{International Joint Conference on Artificial
+%   Intelligence} and the \emph{Conference on Computer Vision and
+%   Pattern Recognition}.
+
+\bibliographystyle{acl_natbib} % We choose the "plain" reference style
+\bibliography{refs} % Entries are in the refs.bib file
+
+\end{document}
