@@ -97,12 +97,47 @@ Rule-based Grammar Checking :}
  fine-tuned on 9,385 sentences with error symbols, achieving a Levenshtein Distance of 1.0394 through extensive post-processing and specialized correction mechanisms for morphologically rich language features. \cite{shahgir2023bangla}\\
 
 Our work differs by implementing a multi-model architecture specifically for Hindi that combines neural models with linguistic rules, moving beyond the purely rule-based approach of Singh et al. and the single-model architecture of the Bangla work, while incorporating Hindi-specific linguistic features and error patterns.
+% \section{Methodology}
+
+% This section must explain your approach to solving the problem. Remember, that this should ensure that your work is potentially reproducible, so try to be as detailed as possible. You don't need to describe established models/architectures from previous work as long as you appropriately cite the relevant papers. If you use prompt-based techniques, make sure to include your prompts (e.g. in an Appendix) along with the generation configuration.
 \section{Methodology}
 
-This section must explain your approach to solving the problem. Remember, that this should ensure that your work is potentially reproducible, so try to be as detailed as possible. You don't need to describe established models/architectures from previous work as long as you appropriately cite the relevant papers. If you use prompt-based techniques, make sure to include your prompts (e.g. in an Appendix) along with the generation configuration.
+%\subsection{Approach to Solving the Problem}
 
-\subsection{Evaluation} 
-How will you evaluate your system? Will you write unit tests? Will you perform human evaluation, or will you use automatic references, and why?
+To develop a tool that provides personalized grammar feedback for non-native Hindi learners, we propose a hybrid approach that combines the power of transformer-based language models with rule-based grammar correction mechanisms. Our solution is designed to provide real-time and personalized feedback to facilitate the learners' journey toward fluency in Hindi. The approach is as follows, data preparation, model selection and training, error detection, error correction, and personalization.
+
+\textbf{Data Preparation}: We planned to create a high-quality dataset of 20,000 Hindi sentences, both correct and incorrect, simulating common errors made by non-native speakers. This helps the model effectively learn error patterns for accurate corrections.
+
+\textbf{Model Selection and Training}: Planning to fine-tune a small HindiT5 model (60M parameters)
+%This Hindi T5 model does not exist
+for grammatical error detection. The model was trained for 100 epochs using 80\% of the data, optimizing with AdamW.
+
+\textbf{Error Detection}: The model uses an encoder-decoder structure to identify and correct common grammatical errors. It detects issues like incorrect gender or number agreement and verb conjugations.
+% on the above line it says that it uses t5 model and here it talks about encoder and decoder structure - which is not in line
+
+\textbf{Post-Processing and Error Correction}: Post-processing involves character-level corrections, dictionary lookups, and regular expressions to refine the output. This ensures grammatical correctness while retaining sentence meaning.
+
+% \textbf{Personalized Feedback System}: A personalization layer tracks user errors to provide targeted suggestions. This helps users address recurring mistakes effectively, enhancing learning outcomes.
+
+\textbf{Evaluation Metrics}: We evaluate the model using Levenshtein Distance, Precision, Recall, and F1 score. 
+% The model achieved strong performance, indicating effective error identification and correction.
+
+\textbf{Reproducibility}: We document the dataset, model architecture, and hyperparameters to ensure reproducibility. Regular expression rules and model scripts will also be provided for further research.
+
+\textbf{Evaluation}: We plan for both automated and human evaluation for comprehensive analysis. This approach ensures the model's effectiveness across various user proficiencies.
+
+% \textbf{Unit Testing}: Each component underwent unit testing, such as tokenization and error detection, to verify functionality. This ensures the stability and correctness of system modules before integration.
+
+\textbf{Automated Evaluation}: We used metrics like Levenshtein Distance and F1 score to objectively assess corrections. This provides consistency in performance evaluation across grammatical error types.
+
+\textbf{Human Evaluation}: 
+% Native and non-native Hindi speakers evaluated fluency, adequacy, and feedback utility.
+The human evaluation addresses nuances that automated metrics might miss.
+
+\textbf{Hybrid Approach}: A hybrid of automated metrics and human evaluation will be used to balance efficiency and qualitative insights. This ensures a comprehensive understanding of model performance.
+
+% \subsection{Evaluation} 
+% How will you evaluate your system? Will you write unit tests? Will you perform human evaluation, or will you use automatic references, and why?
 
 \section{Experiments}
 
