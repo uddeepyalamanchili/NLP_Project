@@ -41,7 +41,7 @@ def read_sentences_from_file(file_path):
         return sentences
 
 # Function to save the jumbled batch to a file to avoid memory overload
-def save_batch_to_file(batch, output_file='output.txt'):
+def save_batch_to_file(batch, output_file='output_shuffle.txt'):
     with open(output_file, 'a', encoding='utf-8') as file:
         for sentence in batch:
             file.write(sentence + ' .\n')
