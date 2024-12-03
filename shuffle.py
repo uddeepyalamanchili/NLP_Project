@@ -73,7 +73,9 @@ def process_sentences_parallel(file_path, device, batch_size=5000):
 
 # Main function to process the dataset
 def main():
-    file_path = "Testing/untitled.src"  # Path to your file
+    # file_path = "Testing/untitled.src"  # Path to your file
+    file_path = "../NLP/data/train_merge.src"  # Path to your file
+
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
     
     # Process the sentences in parallel and jumble them in batches
