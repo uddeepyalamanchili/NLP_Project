@@ -71,6 +71,11 @@ def process_sentences_parallel(file_path, device, batch_size=5000):
         
         return jumbled_sentences
 
+def write_to_file(filename, sentences):
+    with open(filename, 'w', encoding='utf-8') as file:
+        for sentence in sentences:
+            file.write(sentence + ' .\n')  # Writing each sentence followed by a period and new line
+
 # Main function to process the dataset
 def main():
     # file_path = "Testing/untitled.src"  # Path to your file
@@ -84,6 +89,12 @@ def main():
     # Output the first few jumbled sentences (for demonstration)
     for sentence in jumbled_sentences[:10]:  # Adjust the number as needed
         print(sentence)
+    # Function to write the list contents to a file
+
+
+    # Call the function to write jumbled_sentences to a file
+    file_path = 'jumbled_sentences.txt'  # Output file path
+    write_to_file(file_path, jumbled_sentences)
 
 if __name__ == "__main__":
     main()
