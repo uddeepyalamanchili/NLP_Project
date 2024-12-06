@@ -1,0 +1,7 @@
+torch==1.12.1               # PyTorch for model training
+transformers==4.21.1        # HuggingFace Transformers for pre-trained models
+nltk==3.7                   # NLTK for BLEU and GLEU metrics calculation
+matplotlib==3.5.3           # Matplotlib for generating comparison graphs
+tqdm==4.64.0                # TQDM for progress bars
+scikit-learn==1.1.2         # For metrics like precision, recall, and f1-score calculation
+sentencepiece==0.1.96       # Required by MarianTokenizer for tokenizing sentences
