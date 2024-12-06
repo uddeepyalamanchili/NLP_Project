@@ -111,12 +111,11 @@ Usage:
 ### **1. Clone the Repository**
 ```bash
 git clone https://github.com/uddeepyalamanchili/NLP_Project.git
-cd wikiextract
 ```
 
-### **2. Install the required dependencies by running below line**
+### **2. Install the required dependencies**
 
-Run the `setup.sh` script to set up the necessary dependencies, repositories, and data dumps.
+Run below line to set up the necessary dependencies and packages.
 
 ```
 pip install -r requirements.txt
