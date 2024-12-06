@@ -1,0 +1,47 @@
+--- fairseq-py/fairseq/modules/conv_tbc.py	2018-06-16 00:51:18.000000000 +0530
++++ conv_tbc.py	2020-02-13 22:04:59.917080000 +0530
+@@ -27,7 +27,7 @@
+         self.bias = torch.nn.Parameter(torch.Tensor(out_channels))
+ 
+     def forward(self, input):
+-        return input.contiguous().conv_tbc(self.weight, self.bias, self.padding[0])
++        return torch.conv_tbc(input.contiguous(),self.weight, self.bias, self.padding[0])
+ 
+     def __repr__(self):
+         s = ('{name}({in_channels}, {out_channels}, kernel_size={kernel_size}'
+
+--- fairseq-py/fairseq/utils.py	2018-06-16 00:51:18.000000000 +0530
++++ utils.py	2020-02-13 22:04:47.013159000 +0530
+@@ -256,7 +256,7 @@
+     with open(embed_path) as f_embed:
+         next(f_embed)  # skip header
+         for line in f_embed:
+-            pieces = line.strip().split()
++            pieces = line.strip().split(' ')
+             embed_dict[pieces[0]] = torch.Tensor([float(weight) for weight in pieces[1:]])
+     return embed_dict
+
+--- nbest-reranker/features.py	2020-02-15 14:28:59.309199172 +0530
++++ features.py	2020-02-14 22:42:34.478261000 +0530
+@@ -15,7 +15,7 @@
+ 
+ # For KenLM features
+ sys.path.insert(0, 'lib/kenlm_python/')
+-import kenlm
++from lib import kenlm_python as kenlm
+ 
+ 
+ # For edit operations feature
+
+--- fairseq-py/train.py    2018-06-15 12:21:18.000000000 +0530
++++ train.py   2020-07-11 11:55:17.633153381 +0530
+@@ -5,7 +5,8 @@
+ # This source code is licensed under the license found in the LICENSE file in
+ # the root directory of this source tree. An additional grant of patent rights
+ # can be found in the PATENTS file in the same directory.
+-
++import os
++os.symlink=lambda *args,**kwargs:0
+ import collections
+ import itertools
+ import os
