@@ -1,4 +1,3 @@
-# NLP_Assignment3
 ## **Steps to Run Wiki Extract**
 
 ### **1. Clone the Repository**
