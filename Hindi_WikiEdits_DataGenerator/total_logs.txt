@@ -1,0 +1,2082 @@
+(NLP) uddeep@WIN-7MM1H8MLONC:~/NLP_Assignment3/wikiextract$ bash setup.sh
++ '[' '!' -f hiwiki-pages-meta-current.xml ']'
++ echo 'DOWNLOADING HIWIKI'
+DOWNLOADING HIWIKI
++ curl -L --fail --remote-name-all https://dumps.wikimedia.org/hiwiki/20240620/hiwiki-20240620-pages-meta-current.xml.bz2 --output hiwiki-pages-meta-current.xml.bz2
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+100  308M  100  308M    0     0  5027k      0  0:01:02  0:01:02 --:--:-- 5022k
++ bzip2 -d hiwiki-pages-meta-current.xml.bz2
++ '[' '!' -d hindi-pos-tagger-3.0 ']'
+(NLP) uddeep@WIN-7MM1H8MLONC:~/NLP_Assignment3/wikiextract$ rm hindi.output hindi-pos-tagger-3.0/hindi.input.txt
+rm: cannot remove 'hindi.output': No such file or directory
+rm: cannot remove 'hindi-pos-tagger-3.0/hindi.input.txt': No such file or directory
+(NLP) uddeep@WIN-7MM1H8MLONC:~/NLP_Assignment3/wikiextract$ rm extracted
+rm: cannot remove 'extracted': No such file or directory
+(NLP) uddeep@WIN-7MM1H8MLONC:~/NLP_Assignment3/wikiextract$ conda env list
+# conda environments:
+#
+base                     /home/uddeep/anaconda3
+NLP                   *  /home/uddeep/anaconda3/envs/NLP
+gentenv                  /home/uddeep/anaconda3/envs/gentenv
+
+(NLP) uddeep@WIN-7MM1H8MLONC:~/NLP_Assignment3/wikiextract$ conda create --name Ass_3
+Retrieving notices: ...working... done
+Channels:
+ - defaults
+Platform: linux-64
+Collecting package metadata (repodata.json): done
+Solving environment: done
+
+## Package Plan ##
+
+  environment location: /home/uddeep/anaconda3/envs/Ass_3
+
+
+
+Proceed ([y]/n)? ^C
+CondaSystemExit:
+Operation aborted.  Exiting.
+
+(NLP) uddeep@WIN-7MM1H8MLONC:~/NLP_Assignment3/wikiextract$ conda create --name Assign_3
+Channels:
+ - defaults
+Platform: linux-64
+Collecting package metadata (repodata.json): done
+Solving environment: done
+
+## Package Plan ##
+
+  environment location: /home/uddeep/anaconda3/envs/Assign_3
+
+
+
+Proceed ([y]/n)?
+
+Preparing transaction: done
+Verifying transaction: done
+Executing transaction: done
+#
+# To activate this environment, use
+#
+#     $ conda activate Assign_3
+#
+# To deactivate an active environment, use
+#
+#     $ conda deactivate
+
+(NLP) uddeep@WIN-7MM1H8MLONC:~/NLP_Assignment3/wikiextract$ conda activate Assign_3
+(Assign_3) uddeep@WIN-7MM1H8MLONC:~/NLP_Assignment3/wikiextract$ bash run_hiwiki.sh
++ SEED=42
++ OUTPUT_SENT=1000000
++ HIWIKI_FILE=hiwiki-pages-meta-current.xml
++ EXTRACTED_FILE=extracted
++ EXTRACT_TEXT='python3 WikiExtractor.py --quiet --no_templates --filter_disambig_pages   --min_text_length 20   $HIWIKI_FILE -b 5G -o -'
++ TOKENIZE_SENTENCE='python3 indic_sentence_tokenizer.py'
++ SELECT_RANDOM_SENTENCE='shuf -n $OUTPUT_SENT --random-source=<(get_seeded_random $SEED)'
++ INSERT_ERRORS='python3 insert_errors.py hindi.output  --single --edits'
++ '[' '!' -f extracted ']'
++ eval 'python3 WikiExtractor.py --quiet --no_templates --filter_disambig_pages   --min_text_length 20   $HIWIKI_FILE -b 5G -o ->extracted'
+++ python3 WikiExtractor.py --quiet --no_templates --filter_disambig_pages --min_text_length 20 hiwiki-pages-meta-current.xml -b 5G -o -
+/home/uddeep/NLP_Assignment3/wikiextract/WikiExtractor.py:78: DeprecationWarning: 'cgi' is deprecated and slated for removal in Python 3.13
+  import cgi
+Traceback (most recent call last):
+  File "/home/uddeep/NLP_Assignment3/wikiextract/WikiExtractor.py", line 2532, in <module>
+    ExtLinkBracketedRegex = re.compile(
+                            ^^^^^^^^^^^
+  File "/home/uddeep/anaconda3/lib/python3.12/re/__init__.py", line 228, in compile
+    return _compile(pattern, flags)
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/uddeep/anaconda3/lib/python3.12/re/__init__.py", line 307, in _compile
+    p = _compiler.compile(pattern, flags)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/uddeep/anaconda3/lib/python3.12/re/_compiler.py", line 745, in compile
+    p = _parser.parse(p, flags)
+        ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/uddeep/anaconda3/lib/python3.12/re/_parser.py", line 979, in parse
+    p = _parse_sub(source, state, flags & SRE_FLAG_VERBOSE, 0)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/uddeep/anaconda3/lib/python3.12/re/_parser.py", line 460, in _parse_sub
+    itemsappend(_parse(source, state, verbose, nested + 1,
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/uddeep/anaconda3/lib/python3.12/re/_parser.py", line 862, in _parse
+    p = _parse_sub(source, state, sub_verbose, nested + 1)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/uddeep/anaconda3/lib/python3.12/re/_parser.py", line 460, in _parse_sub
+    itemsappend(_parse(source, state, verbose, nested + 1,
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/uddeep/anaconda3/lib/python3.12/re/_parser.py", line 862, in _parse
+    p = _parse_sub(source, state, sub_verbose, nested + 1)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/uddeep/anaconda3/lib/python3.12/re/_parser.py", line 460, in _parse_sub
+    itemsappend(_parse(source, state, verbose, nested + 1,
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/uddeep/anaconda3/lib/python3.12/re/_parser.py", line 840, in _parse
+    raise source.error('global flags not at the start '
+re.error: global flags not at the start of the expression at position 4
+(Assign_3) uddeep@WIN-7MM1H8MLONC:~/NLP_Assignment3/wikiextract$ python --version
+Python 3.12.4
+(Assign_3) uddeep@WIN-7MM1H8MLONC:~/NLP_Assignment3/wikiextract$ conda install python=2.0
+Channels:
+ - defaults
+Platform: linux-64
+Collecting package metadata (repodata.json): done
+Solving environment: failed
+
+PackagesNotFoundError: The following packages are not available from current channels:
+
+  - python=2.0*
+
+Current channels:
+
+  - defaults
+
+To search for alternate channels that may provide the conda package you're
+looking for, navigate to
+
+    https://anaconda.org
+
+and use the search bar at the top of the page.
+
+
+(Assign_3) uddeep@WIN-7MM1H8MLONC:~/NLP_Assignment3/wikiextract$ which python
+/home/uddeep/anaconda3/bin/python
+(Assign_3) uddeep@WIN-7MM1H8MLONC:~/NLP_Assignment3/wikiextract$ conda uninstall python
+
+PackagesNotFoundError: The following packages are missing from the target environment:
+  - python
+
+
+(Assign_3) uddeep@WIN-7MM1H8MLONC:~/NLP_Assignment3/wikiextract$ conda install python=2
+Channels:
+ - defaults
+Platform: linux-64
+Collecting package metadata (repodata.json): done
+Solving environment: done
+
+## Package Plan ##
+
+  environment location: /home/uddeep/anaconda3/envs/Assign_3
+
+  added / updated specs:
+    - python=2
+
+
+The following packages will be downloaded:
+
+    package                    |            build
+    ---------------------------|-----------------
+    certifi-2020.6.20          |     pyhd3eb1b0_3         155 KB
+    pip-19.3.1                 |           py27_0         1.7 MB
+    python-2.7.18              |       h42bf7aa_3        11.3 MB
+    setuptools-44.0.0          |           py27_0         512 KB
+    wheel-0.37.1               |     pyhd3eb1b0_0          33 KB
+    ------------------------------------------------------------
+                                           Total:        13.6 MB
+
+The following NEW packages will be INSTALLED:
+
+  _libgcc_mutex      pkgs/main/linux-64::_libgcc_mutex-0.1-main
+  _openmp_mutex      pkgs/main/linux-64::_openmp_mutex-5.1-1_gnu
+  ca-certificates    pkgs/main/linux-64::ca-certificates-2024.9.24-h06a4308_0
+  certifi            pkgs/main/noarch::certifi-2020.6.20-pyhd3eb1b0_3
+  libffi             pkgs/main/linux-64::libffi-3.4.4-h6a678d5_1
+  libgcc-ng          pkgs/main/linux-64::libgcc-ng-11.2.0-h1234567_1
+  libgomp            pkgs/main/linux-64::libgomp-11.2.0-h1234567_1
+  libstdcxx-ng       pkgs/main/linux-64::libstdcxx-ng-11.2.0-h1234567_1
+  ncurses            pkgs/main/linux-64::ncurses-6.4-h6a678d5_0
+  pip                pkgs/main/linux-64::pip-19.3.1-py27_0
+  python             pkgs/main/linux-64::python-2.7.18-h42bf7aa_3
+  readline           pkgs/main/linux-64::readline-8.2-h5eee18b_0
+  setuptools         pkgs/main/linux-64::setuptools-44.0.0-py27_0
+  sqlite             pkgs/main/linux-64::sqlite-3.45.3-h5eee18b_0
+  tk                 pkgs/main/linux-64::tk-8.6.14-h39e8969_0
+  wheel              pkgs/main/noarch::wheel-0.37.1-pyhd3eb1b0_0
+  zlib               pkgs/main/linux-64::zlib-1.2.13-h5eee18b_1
+
+
+Proceed ([y]/n)?
+
+
+Downloading and Extracting Packages:
+
+Preparing transaction: done
+Verifying transaction: done
+Executing transaction: done
+(Assign_3) uddeep@WIN-7MM1H8MLONC:~/NLP_Assignment3/wikiextract$ python --version
+Python 2.7.18 :: Anaconda, Inc.
+(Assign_3) uddeep@WIN-7MM1H8MLONC:~/NLP_Assignment3/wikiextract$ bash run_hiwiki.sh
++ SEED=42
++ OUTPUT_SENT=1000000
++ HIWIKI_FILE=hiwiki-pages-meta-current.xml
++ EXTRACTED_FILE=extracted
++ EXTRACT_TEXT='python3 WikiExtractor.py --quiet --no_templates --filter_disambig_pages   --min_text_length 20   $HIWIKI_FILE -b 5G -o -'
++ TOKENIZE_SENTENCE='python3 indic_sentence_tokenizer.py'
++ SELECT_RANDOM_SENTENCE='shuf -n $OUTPUT_SENT --random-source=<(get_seeded_random $SEED)'
++ INSERT_ERRORS='python3 insert_errors.py hindi.output  --single --edits'
++ '[' '!' -f extracted ']'
++ '[' -f extracted ']'
++ '[' '!' -f hindi-pos-tagger-3.0/hindi.input.txt ']'
++ wc -l extracted
+0 extracted
++ eval 'python3 indic_sentence_tokenizer.py<extracted>tmp.tok'
+++ python3 indic_sentence_tokenizer.py
++ eval shuf -n '$OUTPUT_SENT' '--random-source=<(get_seeded_random' '$SEED)'
+++ shuf -n 1000000 --random-source=/dev/fd/63
++++ get_seeded_random 42
++++ openssl enc -aes-256-ctr -pass pass:42 -nosalt
++ wc -l hindi.input.txt
+0 hindi.input.txt
++ rm tmp.tok
++ mv hindi.input.txt hindi-pos-tagger-3.0/hindi.input.txt
++ '[' -f hindi-pos-tagger-3.0/hindi.input.txt ']'
++ '[' '!' -f hindi.output ']'
++ cd hindi-pos-tagger-3.0
++ make tag
+run_hiwiki.sh: line 42: make: command not found
+(Assign_3) uddeep@WIN-7MM1H8MLONC:~/NLP_Assignment3/wikiextract$ sudo apt-get install build-essential
+[sudo] password for uddeep:
+Reading package lists... Done
+Building dependency tree... Done
+Reading state information... Done
+The following additional packages will be installed:
+  bzip2 dpkg-dev fakeroot libalgorithm-diff-perl libalgorithm-diff-xs-perl libalgorithm-merge-perl libdpkg-perl libfakeroot libfile-fcntllock-perl
+  lto-disabled-list make
+Suggested packages:
+  bzip2-doc debian-keyring bzr make-doc
+The following NEW packages will be installed:
+  build-essential bzip2 dpkg-dev fakeroot libalgorithm-diff-perl libalgorithm-diff-xs-perl libalgorithm-merge-perl libdpkg-perl libfakeroot
+  libfile-fcntllock-perl lto-disabled-list make
+0 upgraded, 12 newly installed, 0 to remove and 23 not upgraded.
+Need to get 1582 kB of archives.
+After this operation, 6308 kB of additional disk space will be used.
+Do you want to continue? [Y/n] Y
+Get:1 http://archive.ubuntu.com/ubuntu jammy/main amd64 make amd64 4.3-4.1build1 [180 kB]
+Get:2 http://archive.ubuntu.com/ubuntu jammy-updates/main amd64 libdpkg-perl all 1.21.1ubuntu2.3 [237 kB]
+Get:3 http://archive.ubuntu.com/ubuntu jammy/main amd64 bzip2 amd64 1.0.8-5build1 [34.8 kB]
+Get:4 http://archive.ubuntu.com/ubuntu jammy/main amd64 lto-disabled-list all 24 [12.5 kB]
+Get:5 http://archive.ubuntu.com/ubuntu jammy-updates/main amd64 dpkg-dev all 1.21.1ubuntu2.3 [922 kB]
+Get:6 http://archive.ubuntu.com/ubuntu jammy/main amd64 build-essential amd64 12.9ubuntu3 [4744 B]
+Get:7 http://archive.ubuntu.com/ubuntu jammy/main amd64 libfakeroot amd64 1.28-1ubuntu1 [31.5 kB]
+Get:8 http://archive.ubuntu.com/ubuntu jammy/main amd64 fakeroot amd64 1.28-1ubuntu1 [60.4 kB]
+Get:9 http://archive.ubuntu.com/ubuntu jammy/main amd64 libalgorithm-diff-perl all 1.201-1 [41.8 kB]
+Get:10 http://archive.ubuntu.com/ubuntu jammy/main amd64 libalgorithm-diff-xs-perl amd64 0.04-6build3 [11.9 kB]
+Get:11 http://archive.ubuntu.com/ubuntu jammy/main amd64 libalgorithm-merge-perl all 0.08-3 [12.0 kB]
+Get:12 http://archive.ubuntu.com/ubuntu jammy/main amd64 libfile-fcntllock-perl amd64 0.22-3build7 [33.9 kB]
+Fetched 1582 kB in 1s (2494 kB/s)
+Selecting previously unselected package make.
+(Reading database ... 46777 files and directories currently installed.)
+Preparing to unpack .../00-make_4.3-4.1build1_amd64.deb ...
+Unpacking make (4.3-4.1build1) ...
+Selecting previously unselected package libdpkg-perl.
+Preparing to unpack .../01-libdpkg-perl_1.21.1ubuntu2.3_all.deb ...
+Unpacking libdpkg-perl (1.21.1ubuntu2.3) ...
+Selecting previously unselected package bzip2.
+Preparing to unpack .../02-bzip2_1.0.8-5build1_amd64.deb ...
+Unpacking bzip2 (1.0.8-5build1) ...
+Selecting previously unselected package lto-disabled-list.
+Preparing to unpack .../03-lto-disabled-list_24_all.deb ...
+Unpacking lto-disabled-list (24) ...
+Selecting previously unselected package dpkg-dev.
+Preparing to unpack .../04-dpkg-dev_1.21.1ubuntu2.3_all.deb ...
+Unpacking dpkg-dev (1.21.1ubuntu2.3) ...
+Selecting previously unselected package build-essential.
+Preparing to unpack .../05-build-essential_12.9ubuntu3_amd64.deb ...
+Unpacking build-essential (12.9ubuntu3) ...
+Selecting previously unselected package libfakeroot:amd64.
+Preparing to unpack .../06-libfakeroot_1.28-1ubuntu1_amd64.deb ...
+Unpacking libfakeroot:amd64 (1.28-1ubuntu1) ...
+Selecting previously unselected package fakeroot.
+Preparing to unpack .../07-fakeroot_1.28-1ubuntu1_amd64.deb ...
+Unpacking fakeroot (1.28-1ubuntu1) ...
+Selecting previously unselected package libalgorithm-diff-perl.
+Preparing to unpack .../08-libalgorithm-diff-perl_1.201-1_all.deb ...
+Unpacking libalgorithm-diff-perl (1.201-1) ...
+Selecting previously unselected package libalgorithm-diff-xs-perl.
+Preparing to unpack .../09-libalgorithm-diff-xs-perl_0.04-6build3_amd64.deb ...
+Unpacking libalgorithm-diff-xs-perl (0.04-6build3) ...
+Selecting previously unselected package libalgorithm-merge-perl.
+Preparing to unpack .../10-libalgorithm-merge-perl_0.08-3_all.deb ...
+Unpacking libalgorithm-merge-perl (0.08-3) ...
+Selecting previously unselected package libfile-fcntllock-perl.
+Preparing to unpack .../11-libfile-fcntllock-perl_0.22-3build7_amd64.deb ...
+Unpacking libfile-fcntllock-perl (0.22-3build7) ...
+Setting up lto-disabled-list (24) ...
+Setting up libfile-fcntllock-perl (0.22-3build7) ...
+Setting up libalgorithm-diff-perl (1.201-1) ...
+Setting up bzip2 (1.0.8-5build1) ...
+Setting up libfakeroot:amd64 (1.28-1ubuntu1) ...
+Setting up fakeroot (1.28-1ubuntu1) ...
+update-alternatives: using /usr/bin/fakeroot-sysv to provide /usr/bin/fakeroot (fakeroot) in auto mode
+Setting up make (4.3-4.1build1) ...
+Setting up libdpkg-perl (1.21.1ubuntu2.3) ...
+Setting up libalgorithm-diff-xs-perl (0.04-6build3) ...
+Setting up libalgorithm-merge-perl (0.08-3) ...
+Setting up dpkg-dev (1.21.1ubuntu2.3) ...
+Setting up build-essential (12.9ubuntu3) ...
+Processing triggers for man-db (2.10.2-1) ...
+Processing triggers for libc-bin (2.35-0ubuntu3.8) ...
+(Assign_3) uddeep@WIN-7MM1H8MLONC:~/NLP_Assignment3/wikiextract$ bash run_hiwiki.sh
++ SEED=42
++ OUTPUT_SENT=1000000
++ HIWIKI_FILE=hiwiki-pages-meta-current.xml
++ EXTRACTED_FILE=extracted
++ EXTRACT_TEXT='python3 WikiExtractor.py --quiet --no_templates --filter_disambig_pages   --min_text_length 20   $HIWIKI_FILE -b 5G -o -'
++ TOKENIZE_SENTENCE='python3 indic_sentence_tokenizer.py'
++ SELECT_RANDOM_SENTENCE='shuf -n $OUTPUT_SENT --random-source=<(get_seeded_random $SEED)'
++ INSERT_ERRORS='python3 insert_errors.py hindi.output  --single --edits'
++ '[' '!' -f extracted ']'
++ '[' -f extracted ']'
++ '[' '!' -f hindi-pos-tagger-3.0/hindi.input.txt ']'
++ '[' -f hindi-pos-tagger-3.0/hindi.input.txt ']'
++ '[' '!' -f hindi.output ']'
++ cd hindi-pos-tagger-3.0
++ make tag
+chmod +x bin/*
+cat hindi.input.txt | python2 bin/unitok.py -l hindi -n | sed -e 's/^\.$/.\n<\/s>\n<s>/g' |  python2 bin/normalize_vert.py  > hindi.tmp.words
+./bin/tnt -v0 -H models/hindi   hindi.tmp.words | sed -e 's/\t\+/\t/g' | python2 ./bin/lemmatiser.py models/hindi.lemma | python2 bin/tag2vert.py > hindi.output
+rm hindi.tmp.words
+echo "Output stored in hindi.output"
+Output stored in hindi.output
++ wc -l hindi.output
+1 hindi.output
++ cd ..
++ mv hindi-pos-tagger-3.0/hindi.output hindi.output
++ eval 'python3 insert_errors.py hindi.output  --single --edits>hiwiki.augmented.edits'
+++ python3 insert_errors.py hindi.output --single --edits
+Traceback (most recent call last):
+  File "/home/uddeep/NLP_Assignment3/wikiextract/insert_errors.py", line 200, in <module>
+    main(parser_args)
+  File "/home/uddeep/NLP_Assignment3/wikiextract/insert_errors.py", line 176, in main
+    sentence_tagged = pos_tag(sentence)
+                      ^^^^^^^^^^^^^^^^^
+  File "/home/uddeep/NLP_Assignment3/wikiextract/insert_errors.py", line 72, in pos_tag
+    tags.append(components[2])
+                ~~~~~~~~~~^^^
+IndexError: list index out of range
+(Assign_3) uddeep@WIN-7MM1H8MLONC:~/NLP_Assignment3/wikiextract$ python3 --version
+Python 3.12.4
+(Assign_3) uddeep@WIN-7MM1H8MLONC:~/NLP_Assignment3/wikiextract$ python3 insert_errors.py hindi.output  --single --edits
+import argparse done
+Traceback (most recent call last):
+  File "/home/uddeep/NLP_Assignment3/wikiextract/insert_errors.py", line 201, in <module>
+    main(parser_args)
+  File "/home/uddeep/NLP_Assignment3/wikiextract/insert_errors.py", line 176, in main
+    sentence_tagged = pos_tag(sentence)
+                      ^^^^^^^^^^^^^^^^^
+  File "/home/uddeep/NLP_Assignment3/wikiextract/insert_errors.py", line 72, in pos_tag
+    tags.append(components[2])
+                ~~~~~~~~~~^^^
+IndexError: list index out of range
+(Assign_3) uddeep@WIN-7MM1H8MLONC:~/NLP_Assignment3/wikiextract$ python3 insert_errors.py hindi.output  --single --edits
+insert errors done
+Traceback (most recent call last):
+  File "/home/uddeep/NLP_Assignment3/wikiextract/insert_errors.py", line 202, in <module>
+    main(parser_args)
+  File "/home/uddeep/NLP_Assignment3/wikiextract/insert_errors.py", line 176, in main
+    sentence_tagged = pos_tag(sentence)
+                      ^^^^^^^^^^^^^^^^^
+  File "/home/uddeep/NLP_Assignment3/wikiextract/insert_errors.py", line 72, in pos_tag
+    tags.append(components[2])
+                ~~~~~~~~~~^^^
+IndexError: list index out of range
+(Assign_3) uddeep@WIN-7MM1H8MLONC:~/NLP_Assignment3/wikiextract$ python3 insert_errors.py hindi.output  --single --edits
+insert input done
+Traceback (most recent call last):
+  File "/home/uddeep/NLP_Assignment3/wikiextract/insert_errors.py", line 203, in <module>
+    main(parser_args)
+  File "/home/uddeep/NLP_Assignment3/wikiextract/insert_errors.py", line 176, in main
+    sentence_tagged = pos_tag(sentence)
+                      ^^^^^^^^^^^^^^^^^
+  File "/home/uddeep/NLP_Assignment3/wikiextract/insert_errors.py", line 72, in pos_tag
+    tags.append(components[2])
+                ~~~~~~~~~~^^^
+IndexError: list index out of range
+(Assign_3) uddeep@WIN-7MM1H8MLONC:~/NLP_Assignment3/wikiextract$ python3 insert_errors.py hindi.output  --single --edits
+['']
+Traceback (most recent call last):
+  File "/home/uddeep/NLP_Assignment3/wikiextract/insert_errors.py", line 201, in <module>
+    main(parser_args)
+  File "/home/uddeep/NLP_Assignment3/wikiextract/insert_errors.py", line 177, in main
+    sentence_tagged = pos_tag(sentence)
+                      ^^^^^^^^^^^^^^^^^
+  File "/home/uddeep/NLP_Assignment3/wikiextract/insert_errors.py", line 73, in pos_tag
+    tags.append(components[2])
+                ~~~~~~~~~~^^^
+IndexError: list index out of range
+(Assign_3) uddeep@WIN-7MM1H8MLONC:~/NLP_Assignment3/wikiextract$ python3 insert_errors.py hindi.output  --single --edits
+['']
+['']
+Traceback (most recent call last):
+  File "/home/uddeep/NLP_Assignment3/wikiextract/insert_errors.py", line 202, in <module>
+    main(parser_args)
+  File "/home/uddeep/NLP_Assignment3/wikiextract/insert_errors.py", line 178, in main
+    sentence_tagged = pos_tag(sentence)
+                      ^^^^^^^^^^^^^^^^^
+  File "/home/uddeep/NLP_Assignment3/wikiextract/insert_errors.py", line 74, in pos_tag
+    tags.append(components[2])
+                ~~~~~~~~~~^^^
+IndexError: list index out of range
+(Assign_3) uddeep@WIN-7MM1H8MLONC:~/NLP_Assignment3/wikiextract$ python3 insert_errors.py hindi.output  --single --edits
+Namespace(input_file='hindi.output', single=0.6, edits=True)
+['']
+['']
+Traceback (most recent call last):
+  File "/home/uddeep/NLP_Assignment3/wikiextract/insert_errors.py", line 203, in <module>
+    main(parser_args)
+  File "/home/uddeep/NLP_Assignment3/wikiextract/insert_errors.py", line 179, in main
+    sentence_tagged = pos_tag(sentence)
+                      ^^^^^^^^^^^^^^^^^
+  File "/home/uddeep/NLP_Assignment3/wikiextract/insert_errors.py", line 74, in pos_tag
+    tags.append(components[2])
+                ~~~~~~~~~~^^^
+IndexError: list index out of range
+(Assign_3) uddeep@WIN-7MM1H8MLONC:~/NLP_Assignment3/wikiextract$ man wc
+(Assign_3) uddeep@WIN-7MM1H8MLONC:~/NLP_Assignment3/wikiextract$ wc -l | python3 WikiExtractor.py --quiet --no_templates --filter_disambig_pages   --min_tex
+t_length 20   $HIWIKI_FILE -b 5G -o -
+/home/uddeep/NLP_Assignment3/wikiextract/WikiExtractor.py:78: DeprecationWarning: 'cgi' is deprecated and slated for removal in Python 3.13
+  import cgi
+Traceback (most recent call last):
+  File "/home/uddeep/NLP_Assignment3/wikiextract/WikiExtractor.py", line 2532, in <module>
+    ExtLinkBracketedRegex = re.compile(
+                            ^^^^^^^^^^^
+  File "/home/uddeep/anaconda3/lib/python3.12/re/__init__.py", line 228, in compile
+    return _compile(pattern, flags)
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/uddeep/anaconda3/lib/python3.12/re/__init__.py", line 307, in _compile
+    p = _compiler.compile(pattern, flags)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/uddeep/anaconda3/lib/python3.12/re/_compiler.py", line 745, in compile
+    p = _parser.parse(p, flags)
+        ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/uddeep/anaconda3/lib/python3.12/re/_parser.py", line 979, in parse
+    p = _parse_sub(source, state, flags & SRE_FLAG_VERBOSE, 0)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/uddeep/anaconda3/lib/python3.12/re/_parser.py", line 460, in _parse_sub
+    itemsappend(_parse(source, state, verbose, nested + 1,
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/uddeep/anaconda3/lib/python3.12/re/_parser.py", line 862, in _parse
+    p = _parse_sub(source, state, sub_verbose, nested + 1)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/uddeep/anaconda3/lib/python3.12/re/_parser.py", line 460, in _parse_sub
+    itemsappend(_parse(source, state, verbose, nested + 1,
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/uddeep/anaconda3/lib/python3.12/re/_parser.py", line 862, in _parse
+    p = _parse_sub(source, state, sub_verbose, nested + 1)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/uddeep/anaconda3/lib/python3.12/re/_parser.py", line 460, in _parse_sub
+    itemsappend(_parse(source, state, verbose, nested + 1,
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/uddeep/anaconda3/lib/python3.12/re/_parser.py", line 840, in _parse
+    raise source.error('global flags not at the start '
+re.error: global flags not at the start of the expression at position 4
+^C
+(Assign_3) uddeep@WIN-7MM1H8MLONC:~/NLP_Assignment3/wikiextract$ bash run_hiwiki.sh
++ SEED=42
++ OUTPUT_SENT=1000000
++ HIWIKI_FILE=hiwiki-pages-meta-current.xml
++ EXTRACTED_FILE=extracted
++ EXTRACT_TEXT='python3 WikiExtractor.py --quiet --no_templates --filter_disambig_pages   --min_text_length 20   $HIWIKI_FILE -b 5G -o -'
++ TOKENIZE_SENTENCE='python3 indic_sentence_tokenizer.py'
++ SELECT_RANDOM_SENTENCE='shuf -n $OUTPUT_SENT --random-source=<(get_seeded_random $SEED)'
++ INSERT_ERRORS='python3 insert_errors.py hindi.output  --single --edits'
++ '[' '!' -f extracted ']'
++ '[' -f extracted ']'
++ '[' '!' -f hindi-pos-tagger-3.0/hindi.input.txt ']'
++ '[' -f hindi-pos-tagger-3.0/hindi.input.txt ']'
++ '[' '!' -f hindi.output ']'
++ eval 'python3 insert_errors.py hindi.output  --single --edits>hiwiki.augmented.edits'
+++ python3 insert_errors.py hindi.output --single --edits
+Traceback (most recent call last):
+  File "/home/uddeep/NLP_Assignment3/wikiextract/insert_errors.py", line 203, in <module>
+    main(parser_args)
+  File "/home/uddeep/NLP_Assignment3/wikiextract/insert_errors.py", line 179, in main
+    sentence_tagged = pos_tag(sentence)
+                      ^^^^^^^^^^^^^^^^^
+  File "/home/uddeep/NLP_Assignment3/wikiextract/insert_errors.py", line 74, in pos_tag
+    tags.append(components[2])
+                ~~~~~~~~~~^^^
+IndexError: list index out of range
+(Assign_3) uddeep@WIN-7MM1H8MLONC:~/NLP_Assignment3/wikiextract$ python3 WikiExtractor.py --quiet --no_templates --filter_disambig_pages   --min_text_length 20   $HIWIKI_FILE -b 5G -o -
+/home/uddeep/NLP_Assignment3/wikiextract/WikiExtractor.py:78: DeprecationWarning: 'cgi' is deprecated and slated for removal in Python 3.13
+  import cgi
+Traceback (most recent call last):
+  File "/home/uddeep/NLP_Assignment3/wikiextract/WikiExtractor.py", line 2532, in <module>
+    ExtLinkBracketedRegex = re.compile(
+                            ^^^^^^^^^^^
+  File "/home/uddeep/anaconda3/lib/python3.12/re/__init__.py", line 228, in compile
+    return _compile(pattern, flags)
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/uddeep/anaconda3/lib/python3.12/re/__init__.py", line 307, in _compile
+    p = _compiler.compile(pattern, flags)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/uddeep/anaconda3/lib/python3.12/re/_compiler.py", line 745, in compile
+    p = _parser.parse(p, flags)
+        ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/uddeep/anaconda3/lib/python3.12/re/_parser.py", line 979, in parse
+    p = _parse_sub(source, state, flags & SRE_FLAG_VERBOSE, 0)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/uddeep/anaconda3/lib/python3.12/re/_parser.py", line 460, in _parse_sub
+    itemsappend(_parse(source, state, verbose, nested + 1,
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/uddeep/anaconda3/lib/python3.12/re/_parser.py", line 862, in _parse
+    p = _parse_sub(source, state, sub_verbose, nested + 1)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/uddeep/anaconda3/lib/python3.12/re/_parser.py", line 460, in _parse_sub
+    itemsappend(_parse(source, state, verbose, nested + 1,
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/uddeep/anaconda3/lib/python3.12/re/_parser.py", line 862, in _parse
+    p = _parse_sub(source, state, sub_verbose, nested + 1)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/uddeep/anaconda3/lib/python3.12/re/_parser.py", line 460, in _parse_sub
+    itemsappend(_parse(source, state, verbose, nested + 1,
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/uddeep/anaconda3/lib/python3.12/re/_parser.py", line 840, in _parse
+    raise source.error('global flags not at the start '
+re.error: global flags not at the start of the expression at position 4
+(Assign_3) uddeep@WIN-7MM1H8MLONC:~/NLP_Assignment3/wikiextract$ man cp
+(Assign_3) uddeep@WIN-7MM1H8MLONC:~/NLP_Assignment3/wikiextract$ man cp
+(Assign_3) uddeep@WIN-7MM1H8MLONC:~/NLP_Assignment3/wikiextract$ python3 WikiExtractor.py --quiet --no_templates --filter_disambig_pages   --min_text_length 20   hiwiki-pages-meta-current.xml -b 5G -o -
+/home/uddeep/NLP_Assignment3/wikiextract/WikiExtractor.py:78: DeprecationWarning: 'cgi' is deprecated and slated for removal in Python 3.13
+  import cgi
+Traceback (most recent call last):
+  File "/home/uddeep/NLP_Assignment3/wikiextract/WikiExtractor.py", line 2532, in <module>
+    ExtLinkBracketedRegex = re.compile(
+                            ^^^^^^^^^^^
+  File "/home/uddeep/anaconda3/lib/python3.12/re/__init__.py", line 228, in compile
+    return _compile(pattern, flags)
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/uddeep/anaconda3/lib/python3.12/re/__init__.py", line 307, in _compile
+    p = _compiler.compile(pattern, flags)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/uddeep/anaconda3/lib/python3.12/re/_compiler.py", line 745, in compile
+    p = _parser.parse(p, flags)
+        ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/uddeep/anaconda3/lib/python3.12/re/_parser.py", line 979, in parse
+    p = _parse_sub(source, state, flags & SRE_FLAG_VERBOSE, 0)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/uddeep/anaconda3/lib/python3.12/re/_parser.py", line 460, in _parse_sub
+    itemsappend(_parse(source, state, verbose, nested + 1,
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/uddeep/anaconda3/lib/python3.12/re/_parser.py", line 862, in _parse
+    p = _parse_sub(source, state, sub_verbose, nested + 1)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/uddeep/anaconda3/lib/python3.12/re/_parser.py", line 460, in _parse_sub
+    itemsappend(_parse(source, state, verbose, nested + 1,
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/uddeep/anaconda3/lib/python3.12/re/_parser.py", line 862, in _parse
+    p = _parse_sub(source, state, sub_verbose, nested + 1)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/uddeep/anaconda3/lib/python3.12/re/_parser.py", line 460, in _parse_sub
+    itemsappend(_parse(source, state, verbose, nested + 1,
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/uddeep/anaconda3/lib/python3.12/re/_parser.py", line 840, in _parse
+    raise source.error('global flags not at the start '
+re.error: global flags not at the start of the expression at position 4
+(Assign_3) uddeep@WIN-7MM1H8MLONC:~/NLP_Assignment3/wikiextract$ python3 WikiExtractor.py --quiet --no_templates --filter_disambig_pages   --min_text_length 20   hiwiki-pages-meta-current.xml
+/home/uddeep/NLP_Assignment3/wikiextract/WikiExtractor.py:78: DeprecationWarning: 'cgi' is deprecated and slated for removal in Python 3.13
+  import cgi
+Traceback (most recent call last):
+  File "/home/uddeep/NLP_Assignment3/wikiextract/WikiExtractor.py", line 2532, in <module>
+    ExtLinkBracketedRegex = re.compile(
+                            ^^^^^^^^^^^
+  File "/home/uddeep/anaconda3/lib/python3.12/re/__init__.py", line 228, in compile
+    return _compile(pattern, flags)
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/uddeep/anaconda3/lib/python3.12/re/__init__.py", line 307, in _compile
+    p = _compiler.compile(pattern, flags)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/uddeep/anaconda3/lib/python3.12/re/_compiler.py", line 745, in compile
+    p = _parser.parse(p, flags)
+        ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/uddeep/anaconda3/lib/python3.12/re/_parser.py", line 979, in parse
+    p = _parse_sub(source, state, flags & SRE_FLAG_VERBOSE, 0)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/uddeep/anaconda3/lib/python3.12/re/_parser.py", line 460, in _parse_sub
+    itemsappend(_parse(source, state, verbose, nested + 1,
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/uddeep/anaconda3/lib/python3.12/re/_parser.py", line 862, in _parse
+    p = _parse_sub(source, state, sub_verbose, nested + 1)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/uddeep/anaconda3/lib/python3.12/re/_parser.py", line 460, in _parse_sub
+    itemsappend(_parse(source, state, verbose, nested + 1,
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/uddeep/anaconda3/lib/python3.12/re/_parser.py", line 862, in _parse
+    p = _parse_sub(source, state, sub_verbose, nested + 1)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/uddeep/anaconda3/lib/python3.12/re/_parser.py", line 460, in _parse_sub
+    itemsappend(_parse(source, state, verbose, nested + 1,
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/uddeep/anaconda3/lib/python3.12/re/_parser.py", line 840, in _parse
+    raise source.error('global flags not at the start '
+re.error: global flags not at the start of the expression at position 4
+(Assign_3) uddeep@WIN-7MM1H8MLONC:~/NLP_Assignment3/wikiextract$ python --version
+Python 2.7.18 :: Anaconda, Inc.
+(Assign_3) uddeep@WIN-7MM1H8MLONC:~/NLP_Assignment3/wikiextract$ python3 --version
+Python 3.12.4
+(Assign_3) uddeep@WIN-7MM1H8MLONC:~/NLP_Assignment3/wikiextract$ python3 WikiExtractor.py --quiet --no_templates --filter_disambig_pages   --min_text_length 20   hiwiki-pages-meta-current.xml
+Traceback (most recent call last):
+  File "/home/uddeep/NLP_Assignment3/wikiextract/WikiExtractor.py", line 66, in <module>
+    from .extract import Extractor, ignoreTag, define_template, acceptedNamespaces
+ImportError: attempted relative import with no known parent package
+(Assign_3) uddeep@WIN-7MM1H8MLONC:~/NLP_Assignment3/wikiextract$ bash setup.sh
++ '[' '!' -f hiwiki-pages-meta-current.xml ']'
++ '[' '!' -d hindi-pos-tagger-3.0 ']'
+(Assign_3) uddeep@WIN-7MM1H8MLONC:~/NLP_Assignment3/wikiextract$ bash run_hiwiki.sh
++ SEED=42
++ OUTPUT_SENT=1000000
++ HIWIKI_FILE=hiwiki-pages-meta-current.xml
++ EXTRACTED_FILE=extracted
++ EXTRACT_TEXT='python3 WikiExtractor.py --quiet --no_templates --filter_disambig_pages   --min_text_length 20   $HIWIKI_FILE -b 5G -o -'
++ TOKENIZE_SENTENCE='python3 indic_sentence_tokenizer.py'
++ SELECT_RANDOM_SENTENCE='shuf -n $OUTPUT_SENT --random-source=<(get_seeded_random $SEED)'
++ INSERT_ERRORS='python3 insert_errors.py hindi.output  --single --edits'
++ '[' '!' -f extracted ']'
++ '[' -f extracted ']'
++ '[' '!' -f hindi-pos-tagger-3.0/hindi.input.txt ']'
++ '[' -f hindi-pos-tagger-3.0/hindi.input.txt ']'
++ '[' '!' -f hindi.output ']'
++ eval 'python3 insert_errors.py hindi.output  --single --edits>hiwiki.augmented.edits'
+++ python3 insert_errors.py hindi.output --single --edits
+Traceback (most recent call last):
+  File "/home/uddeep/NLP_Assignment3/wikiextract/insert_errors.py", line 200, in <module>
+    main(parser_args)
+  File "/home/uddeep/NLP_Assignment3/wikiextract/insert_errors.py", line 176, in main
+    sentence_tagged = pos_tag(sentence)
+                      ^^^^^^^^^^^^^^^^^
+  File "/home/uddeep/NLP_Assignment3/wikiextract/insert_errors.py", line 72, in pos_tag
+    tags.append(components[2])
+                ~~~~~~~~~~^^^
+IndexError: list index out of range
+(Assign_3) uddeep@WIN-7MM1H8MLONC:~/NLP_Assignment3/wikiextract$ bash run_hiwiki.sh
++ SEED=42
++ OUTPUT_SENT=1000000
++ HIWIKI_FILE=hiwiki-pages-meta-current.xml
++ EXTRACTED_FILE=extracted
++ EXTRACT_TEXT='python3 WikiExtractor.py --quiet --no_templates --filter_disambig_pages   --min_text_length 20   $HIWIKI_FILE -b 5G -o -'
++ TOKENIZE_SENTENCE='python3 indic_sentence_tokenizer.py'
++ SELECT_RANDOM_SENTENCE='shuf -n $OUTPUT_SENT --random-source=<(get_seeded_random $SEED)'
++ INSERT_ERRORS='python3 insert_errors.py hindi.output  --single --edits'
++ '[' '!' -f extracted ']'
++ '[' -f extracted ']'
++ '[' '!' -f hindi-pos-tagger-3.0/hindi.input.txt ']'
++ '[' -f hindi-pos-tagger-3.0/hindi.input.txt ']'
++ '[' '!' -f hindi.output ']'
++ eval 'python3 insert_errors.py hindi.output  --single --edits>hiwiki.augmented.edits'
+++ python3 insert_errors.py hindi.output --single --edits
+Traceback (most recent call last):
+  File "/home/uddeep/NLP_Assignment3/wikiextract/insert_errors.py", line 200, in <module>
+    main(parser_args)
+  File "/home/uddeep/NLP_Assignment3/wikiextract/insert_errors.py", line 176, in main
+    sentence_tagged = pos_tag(sentence)
+                      ^^^^^^^^^^^^^^^^^
+  File "/home/uddeep/NLP_Assignment3/wikiextract/insert_errors.py", line 72, in pos_tag
+    tags.append(components[2])
+                ~~~~~~~~~~^^^
+IndexError: list index out of range
+(Assign_3) uddeep@WIN-7MM1H8MLONC:~/NLP_Assignment3/wikiextract$ git status
+On branch master
+Your branch is up to date with 'origin/master'.
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+        hiwiki-pages-meta-current.xml
+
+nothing added to commit but untracked files present (use "git add" to track)
+(Assign_3) uddeep@WIN-7MM1H8MLONC:~/NLP_Assignment3/wikiextract$ python2 --version
+Python 2.7.18 :: Anaconda, Inc.
+(Assign_3) uddeep@WIN-7MM1H8MLONC:~/NLP_Assignment3/wikiextract$ python3 WikiExtractor.py --quiet --no_templates --filter_disambig_pages   --min_text_length 20   $HIWIKI_FILE -b 5G -o -
+/home/uddeep/NLP_Assignment3/wikiextract/WikiExtractor.py:78: DeprecationWarning: 'cgi' is deprecated and slated for removal in Python 3.13
+  import cgi
+Traceback (most recent call last):
+  File "/home/uddeep/NLP_Assignment3/wikiextract/WikiExtractor.py", line 2532, in <module>
+    ExtLinkBracketedRegex = re.compile(
+                            ^^^^^^^^^^^
+  File "/home/uddeep/anaconda3/lib/python3.12/re/__init__.py", line 228, in compile
+    return _compile(pattern, flags)
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/uddeep/anaconda3/lib/python3.12/re/__init__.py", line 307, in _compile
+    p = _compiler.compile(pattern, flags)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/uddeep/anaconda3/lib/python3.12/re/_compiler.py", line 745, in compile
+    p = _parser.parse(p, flags)
+        ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/uddeep/anaconda3/lib/python3.12/re/_parser.py", line 979, in parse
+    p = _parse_sub(source, state, flags & SRE_FLAG_VERBOSE, 0)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/uddeep/anaconda3/lib/python3.12/re/_parser.py", line 460, in _parse_sub
+    itemsappend(_parse(source, state, verbose, nested + 1,
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/uddeep/anaconda3/lib/python3.12/re/_parser.py", line 862, in _parse
+    p = _parse_sub(source, state, sub_verbose, nested + 1)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/uddeep/anaconda3/lib/python3.12/re/_parser.py", line 460, in _parse_sub
+    itemsappend(_parse(source, state, verbose, nested + 1,
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/uddeep/anaconda3/lib/python3.12/re/_parser.py", line 862, in _parse
+    p = _parse_sub(source, state, sub_verbose, nested + 1)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/uddeep/anaconda3/lib/python3.12/re/_parser.py", line 460, in _parse_sub
+    itemsappend(_parse(source, state, verbose, nested + 1,
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/uddeep/anaconda3/lib/python3.12/re/_parser.py", line 840, in _parse
+    raise source.error('global flags not at the start '
+re.error: global flags not at the start of the expression at position 4
+(Assign_3) uddeep@WIN-7MM1H8MLONC:~/NLP_Assignment3/wikiextract$ sudo apt update
+[sudo] password for uddeep:
+Get:1 http://security.ubuntu.com/ubuntu jammy-security InRelease [129 kB]
+Hit:2 http://archive.ubuntu.com/ubuntu jammy InRelease
+Get:3 http://archive.ubuntu.com/ubuntu jammy-updates InRelease [128 kB]
+Get:4 http://archive.ubuntu.com/ubuntu jammy-backports InRelease [127 kB]
+Get:5 https://repo.mongodb.org/apt/ubuntu jammy/mongodb-org/7.0 InRelease [3005 B]
+Get:6 http://security.ubuntu.com/ubuntu jammy-security/main amd64 Packages [1933 kB]
+Get:7 http://archive.ubuntu.com/ubuntu jammy-updates/main amd64 Packages [2150 kB]
+Get:8 https://repo.mongodb.org/apt/ubuntu jammy/mongodb-org/7.0/multiverse amd64 Packages [56.8 kB]
+Get:9 http://security.ubuntu.com/ubuntu jammy-security/main Translation-en [309 kB]
+Get:10 http://security.ubuntu.com/ubuntu jammy-security/main amd64 c-n-f Metadata [13.3 kB]
+Get:11 http://security.ubuntu.com/ubuntu jammy-security/restricted amd64 Packages [2573 kB]
+Get:12 https://repo.mongodb.org/apt/ubuntu jammy/mongodb-org/7.0/multiverse arm64 Packages [55.4 kB]
+Get:13 http://security.ubuntu.com/ubuntu jammy-security/restricted Translation-en [444 kB]
+Get:14 http://security.ubuntu.com/ubuntu jammy-security/restricted amd64 c-n-f Metadata [580 B]
+Get:15 http://security.ubuntu.com/ubuntu jammy-security/universe amd64 Packages [914 kB]
+Get:16 http://security.ubuntu.com/ubuntu jammy-security/universe Translation-en [181 kB]
+Get:17 http://security.ubuntu.com/ubuntu jammy-security/universe amd64 c-n-f Metadata [19.5 kB]
+Get:18 http://security.ubuntu.com/ubuntu jammy-security/multiverse amd64 Packages [37.2 kB]
+Get:19 http://security.ubuntu.com/ubuntu jammy-security/multiverse amd64 c-n-f Metadata [224 B]
+Get:20 http://archive.ubuntu.com/ubuntu jammy-updates/main Translation-en [368 kB]
+Get:21 http://archive.ubuntu.com/ubuntu jammy-updates/main amd64 c-n-f Metadata [17.9 kB]
+Get:22 http://archive.ubuntu.com/ubuntu jammy-updates/restricted amd64 Packages [2633 kB]
+Get:23 http://archive.ubuntu.com/ubuntu jammy-updates/restricted Translation-en [455 kB]
+Get:24 http://archive.ubuntu.com/ubuntu jammy-updates/restricted amd64 c-n-f Metadata [612 B]
+Get:25 http://archive.ubuntu.com/ubuntu jammy-updates/universe amd64 Packages [1134 kB]
+Get:26 http://archive.ubuntu.com/ubuntu jammy-updates/universe Translation-en [265 kB]
+Get:27 http://archive.ubuntu.com/ubuntu jammy-updates/universe amd64 c-n-f Metadata [26.4 kB]
+Get:28 http://archive.ubuntu.com/ubuntu jammy-updates/multiverse amd64 Packages [43.3 kB]
+Get:29 http://archive.ubuntu.com/ubuntu jammy-updates/multiverse amd64 c-n-f Metadata [440 B]
+Get:30 http://archive.ubuntu.com/ubuntu jammy-backports/universe amd64 Packages [28.8 kB]
+Get:31 http://archive.ubuntu.com/ubuntu jammy-backports/universe Translation-en [16.5 kB]
+Get:32 http://archive.ubuntu.com/ubuntu jammy-backports/universe amd64 c-n-f Metadata [672 B]
+Fetched 14.1 MB in 2s (5745 kB/s)
+Reading package lists... Done
+Building dependency tree... Done
+Reading state information... Done
+41 packages can be upgraded. Run 'apt list --upgradable' to see them.
+(Assign_3) uddeep@WIN-7MM1H8MLONC:~/NLP_Assignment3/wikiextract$ sudp apt upgrade
+Command 'sudp' not found, did you mean:
+  command 'ssdp' from snap ssdp (0.0.1)
+  command 'sfdp' from deb graphviz (2.42.2-6ubuntu0.1)
+  command 'sup' from deb sup (20100519-3)
+  command 'sudo' from deb sudo (1.9.9-1ubuntu2.4)
+  command 'sudo' from deb sudo-ldap (1.9.9-1ubuntu2.4)
+See 'snap info <snapname>' for additional versions.
+(Assign_3) uddeep@WIN-7MM1H8MLONC:~/NLP_Assignment3/wikiextract$ sudo apt upgrade
+Reading package lists... Done
+Building dependency tree... Done
+Reading state information... Done
+Calculating upgrade... Done
+The following packages were automatically installed and are no longer required:
+  htop libnl-3-200 libnl-genl-3-200
+Use 'sudo apt autoremove' to remove them.
+Get more security updates through Ubuntu Pro with 'esm-apps' enabled:
+  maven libmaven3-core-java
+Learn more about Ubuntu Pro at https://ubuntu.com/pro
+The following NEW packages will be installed:
+  bc cloud-guest-utils cloud-init eatmydata fdisk gdisk landscape-client landscape-common libcolord2 libeatmydata1 libegl-mesa0 libegl1 libepoxy0
+  libfdisk1 libgbm1 libgtk-3-0 libgtk-3-bin libgtk-3-common libwayland-client0 libwayland-cursor0 libwayland-egl1 libwayland-server0 libxkbcommon0
+  python-babel-localedata python3-attr python3-automat python3-babel python3-bcrypt python3-certifi python3-chardet python3-click python3-colorama
+  python3-configobj python3-constantly python3-debconf python3-distutils python3-hamcrest python3-hyperlink python3-idna python3-incremental
+  python3-jinja2 python3-json-pointer python3-jsonpatch python3-jsonschema python3-lib2to3 python3-markupsafe python3-openssl python3-pyasn1
+  python3-pyasn1-modules python3-pycurl python3-pyrsistent python3-requests python3-serial python3-service-identity python3-setuptools python3-twisted
+  python3-tz python3-urllib3 python3-zope.interface
+The following packages have been kept back:
+  mongodb-org
+The following packages will be upgraded:
+  apt apt-utils base-files distro-info-data libapt-pkg6.0 libgd3 libpcap0.8 linux-libc-dev mongodb-mongosh mongodb-org-database
+  mongodb-org-database-tools-extra mongodb-org-mongos mongodb-org-server mongodb-org-shell mongodb-org-tools motd-news-config nano openjdk-17-jdk
+  openjdk-17-jdk-headless openjdk-17-jre openjdk-17-jre-headless python-apt-common python3-apt python3-distupgrade python3-update-manager snapd
+  ubuntu-advantage-tools ubuntu-minimal ubuntu-pro-client ubuntu-pro-client-l10n ubuntu-release-upgrader-core ubuntu-standard ubuntu-wsl
+  update-manager-core vim vim-common vim-runtime vim-tiny wsl-setup xxd
+40 upgraded, 59 newly installed, 0 to remove and 1 not upgraded.
+7 standard LTS security updates
+Need to get 294 MB of archives.
+After this operation, 74.8 MB of additional disk space will be used.
+Do you want to continue? [Y/n] Y
+Get:1 http://archive.ubuntu.com/ubuntu jammy-updates/main amd64 motd-news-config all 12ubuntu4.7 [3822 B]
+Get:2 http://archive.ubuntu.com/ubuntu jammy-updates/main amd64 base-files amd64 12ubuntu4.7 [61.9 kB]
+Get:3 https://repo.mongodb.org/apt/ubuntu jammy/mongodb-org/7.0/multiverse amd64 mongodb-mongosh amd64 2.3.3 [54.1 MB]
+Get:4 http://archive.ubuntu.com/ubuntu jammy-updates/main amd64 libapt-pkg6.0 amd64 2.4.13 [912 kB]
+Get:5 http://archive.ubuntu.com/ubuntu jammy-updates/main amd64 apt amd64 2.4.13 [1363 kB]
+Get:6 http://archive.ubuntu.com/ubuntu jammy-updates/main amd64 apt-utils amd64 2.4.13 [211 kB]
+Get:7 http://archive.ubuntu.com/ubuntu jammy-updates/main amd64 distro-info-data all 0.52ubuntu0.8 [5302 B]
+Get:8 http://archive.ubuntu.com/ubuntu jammy-updates/main amd64 python-apt-common all 2.4.0ubuntu4 [14.6 kB]
+Get:9 http://archive.ubuntu.com/ubuntu jammy-updates/main amd64 python3-apt amd64 2.4.0ubuntu4 [164 kB]
+Get:10 http://archive.ubuntu.com/ubuntu jammy-updates/main amd64 ubuntu-pro-client-l10n amd64 34~22.04 [19.1 kB]
+Get:11 http://archive.ubuntu.com/ubuntu jammy-updates/main amd64 ubuntu-pro-client amd64 34~22.04 [221 kB]
+Get:12 http://archive.ubuntu.com/ubuntu jammy-updates/main amd64 ubuntu-advantage-tools all 34~22.04 [10.9 kB]
+Get:13 http://archive.ubuntu.com/ubuntu jammy-updates/main amd64 xxd amd64 2:8.2.3995-1ubuntu2.20 [52.5 kB]
+Get:14 http://archive.ubuntu.com/ubuntu jammy-updates/main amd64 vim amd64 2:8.2.3995-1ubuntu2.20 [1729 kB]
+Get:15 http://archive.ubuntu.com/ubuntu jammy-updates/main amd64 vim-tiny amd64 2:8.2.3995-1ubuntu2.20 [708 kB]
+Get:16 http://archive.ubuntu.com/ubuntu jammy-updates/main amd64 vim-runtime all 2:8.2.3995-1ubuntu2.20 [6834 kB]
+Get:17 http://archive.ubuntu.com/ubuntu jammy-updates/main amd64 vim-common all 2:8.2.3995-1ubuntu2.20 [81.5 kB]
+Get:18 http://archive.ubuntu.com/ubuntu jammy-updates/main amd64 ubuntu-minimal amd64 1.481.4 [2928 B]
+Get:19 http://archive.ubuntu.com/ubuntu jammy-updates/main amd64 libpcap0.8 amd64 1.10.1-4ubuntu1.22.04.1 [145 kB]
+Get:20 http://archive.ubuntu.com/ubuntu jammy-updates/main amd64 nano amd64 6.2-1ubuntu0.1 [280 kB]
+Get:21 http://archive.ubuntu.com/ubuntu jammy-updates/main amd64 ubuntu-release-upgrader-core all 1:22.04.20 [26.2 kB]
+Get:22 http://archive.ubuntu.com/ubuntu jammy-updates/main amd64 python3-distupgrade all 1:22.04.20 [106 kB]
+Get:23 http://archive.ubuntu.com/ubuntu jammy-updates/main amd64 python3-update-manager all 1:22.04.21 [39.1 kB]
+Get:24 http://archive.ubuntu.com/ubuntu jammy-updates/main amd64 update-manager-core all 1:22.04.21 [11.5 kB]
+Get:25 http://archive.ubuntu.com/ubuntu jammy-updates/main amd64 ubuntu-standard amd64 1.481.4 [2948 B]
+Get:26 http://archive.ubuntu.com/ubuntu jammy/main amd64 bc amd64 1.07.1-3build1 [87.6 kB]
+Get:27 http://archive.ubuntu.com/ubuntu jammy/main amd64 libeatmydata1 amd64 130-2build1 [7498 B]
+Get:28 http://archive.ubuntu.com/ubuntu jammy/main amd64 eatmydata all 130-2build1 [5584 B]
+Get:29 http://archive.ubuntu.com/ubuntu jammy-updates/main amd64 libfdisk1 amd64 2.37.2-4ubuntu3.4 [140 kB]
+Get:30 http://archive.ubuntu.com/ubuntu jammy-updates/main amd64 fdisk amd64 2.37.2-4ubuntu3.4 [122 kB]
+Get:31 http://archive.ubuntu.com/ubuntu jammy/main amd64 python3-bcrypt amd64 3.2.0-1build1 [32.7 kB]
+Get:32 http://archive.ubuntu.com/ubuntu jammy/main amd64 python3-hamcrest all 2.0.2-2 [26.8 kB]
+Get:33 http://archive.ubuntu.com/ubuntu jammy-updates/main amd64 python3-idna all 3.3-1ubuntu0.1 [52.1 kB]
+Get:34 http://archive.ubuntu.com/ubuntu jammy/main amd64 python3-openssl all 21.0.0-1 [45.2 kB]
+Get:35 http://archive.ubuntu.com/ubuntu jammy/main amd64 python3-attr all 21.2.0-1 [44.0 kB]
+Get:36 http://archive.ubuntu.com/ubuntu jammy/main amd64 python3-pyasn1 all 0.4.8-1 [50.9 kB]
+Get:37 http://archive.ubuntu.com/ubuntu jammy/main amd64 python3-pyasn1-modules all 0.2.1-1 [33.0 kB]
+Get:38 http://archive.ubuntu.com/ubuntu jammy/main amd64 python3-service-identity all 18.1.0-6 [10.7 kB]
+Get:39 http://archive.ubuntu.com/ubuntu jammy/main amd64 python3-automat all 20.2.0-1 [27.6 kB]
+Get:40 http://archive.ubuntu.com/ubuntu jammy/main amd64 python3-constantly all 15.1.0-2 [8396 B]
+Get:41 http://archive.ubuntu.com/ubuntu jammy/main amd64 python3-hyperlink all 21.0.0-3 [68.8 kB]
+Get:42 http://archive.ubuntu.com/ubuntu jammy/main amd64 python3-incremental all 21.3.0-1 [14.4 kB]
+Get:43 http://archive.ubuntu.com/ubuntu jammy/main amd64 python3-zope.interface amd64 5.4.0-1build1 [142 kB]
+Get:44 http://archive.ubuntu.com/ubuntu jammy-updates/main amd64 python3-twisted all 22.1.0-2ubuntu2.5 [2006 kB]
+Get:45 http://archive.ubuntu.com/ubuntu jammy-updates/main amd64 python3-configobj all 5.0.6-5ubuntu0.1 [34.9 kB]
+Get:46 http://archive.ubuntu.com/ubuntu jammy-updates/main amd64 landscape-common amd64 23.02-0ubuntu1~22.04.3 [88.7 kB]
+Get:47 http://archive.ubuntu.com/ubuntu jammy/main amd64 python3-pycurl amd64 7.44.1-4build1 [52.9 kB]
+Get:48 http://archive.ubuntu.com/ubuntu jammy-updates/main amd64 landscape-client amd64 23.02-0ubuntu1~22.04.3 [113 kB]
+Get:49 http://archive.ubuntu.com/ubuntu jammy/main amd64 libcolord2 amd64 1.4.6-1 [155 kB]
+Get:50 http://archive.ubuntu.com/ubuntu jammy-updates/main amd64 libwayland-server0 amd64 1.20.0-1ubuntu0.1 [34.3 kB]
+Get:51 http://archive.ubuntu.com/ubuntu jammy-updates/main amd64 libgbm1 amd64 23.2.1-1ubuntu3.1~22.04.2 [33.5 kB]
+Get:52 http://archive.ubuntu.com/ubuntu jammy-updates/main amd64 libwayland-client0 amd64 1.20.0-1ubuntu0.1 [25.9 kB]
+Get:53 http://archive.ubuntu.com/ubuntu jammy-updates/main amd64 libegl-mesa0 amd64 23.2.1-1ubuntu3.1~22.04.2 [118 kB]
+Get:54 http://archive.ubuntu.com/ubuntu jammy/main amd64 libepoxy0 amd64 1.5.10-1 [237 kB]
+Get:55 http://archive.ubuntu.com/ubuntu jammy-updates/main amd64 libgd3 amd64 2.3.0-2ubuntu2.3 [129 kB]
+Get:56 http://archive.ubuntu.com/ubuntu jammy-updates/main amd64 libwayland-cursor0 amd64 1.20.0-1ubuntu0.1 [10.7 kB]
+Get:57 http://archive.ubuntu.com/ubuntu jammy-updates/main amd64 libwayland-egl1 amd64 1.20.0-1ubuntu0.1 [5582 B]
+Get:58 http://archive.ubuntu.com/ubuntu jammy/main amd64 libxkbcommon0 amd64 1.4.0-1 [125 kB]
+Get:59 http://archive.ubuntu.com/ubuntu jammy-updates/main amd64 libgtk-3-common all 3.24.33-1ubuntu2.2 [239 kB]
+Get:60 http://archive.ubuntu.com/ubuntu jammy-updates/main amd64 libgtk-3-0 amd64 3.24.33-1ubuntu2.2 [3053 kB]
+Get:61 http://archive.ubuntu.com/ubuntu jammy-updates/main amd64 libgtk-3-bin amd64 3.24.33-1ubuntu2.2 [69.6 kB]
+Get:62 http://archive.ubuntu.com/ubuntu jammy-updates/main amd64 linux-libc-dev amd64 5.15.0-125.135 [1345 kB]
+Get:63 http://archive.ubuntu.com/ubuntu jammy-updates/universe amd64 openjdk-17-jdk amd64 17.0.13+11-2ubuntu1~22.04 [2366 kB]
+Get:64 http://archive.ubuntu.com/ubuntu jammy-updates/universe amd64 openjdk-17-jdk-headless amd64 17.0.13+11-2ubuntu1~22.04 [71.4 MB]
+Get:65 https://repo.mongodb.org/apt/ubuntu jammy/mongodb-org/7.0/multiverse amd64 mongodb-org-shell amd64 7.0.15 [2986 B]
+Get:66 https://repo.mongodb.org/apt/ubuntu jammy/mongodb-org/7.0/multiverse amd64 mongodb-org-server amd64 7.0.15 [36.5 MB]
+Get:67 http://archive.ubuntu.com/ubuntu jammy-updates/universe amd64 openjdk-17-jre amd64 17.0.13+11-2ubuntu1~22.04 [234 kB]
+Get:68 http://archive.ubuntu.com/ubuntu jammy-updates/universe amd64 openjdk-17-jre-headless amd64 17.0.13+11-2ubuntu1~22.04 [48.4 MB]
+Get:69 https://repo.mongodb.org/apt/ubuntu jammy/mongodb-org/7.0/multiverse amd64 mongodb-org-mongos amd64 7.0.15 [25.4 MB]
+Get:70 http://archive.ubuntu.com/ubuntu jammy/main amd64 python-babel-localedata all 2.8.0+dfsg.1-7 [4982 kB]
+Get:71 http://archive.ubuntu.com/ubuntu jammy-updates/main amd64 python3-tz all 2022.1-1ubuntu0.22.04.1 [30.7 kB]
+Get:72 http://archive.ubuntu.com/ubuntu jammy/main amd64 python3-babel all 2.8.0+dfsg.1-7 [85.1 kB]
+Get:73 http://archive.ubuntu.com/ubuntu jammy/main amd64 python3-certifi all 2020.6.20-1 [150 kB]
+Get:74 http://archive.ubuntu.com/ubuntu jammy/main amd64 python3-chardet all 4.0.0-1 [98.0 kB]
+Get:75 http://archive.ubuntu.com/ubuntu jammy/main amd64 python3-colorama all 0.4.4-1 [24.5 kB]
+Get:76 http://archive.ubuntu.com/ubuntu jammy/main amd64 python3-click all 8.0.3-1 [78.3 kB]
+Get:77 http://archive.ubuntu.com/ubuntu jammy/main amd64 python3-debconf all 1.5.79ubuntu1 [3914 B]
+Get:78 http://archive.ubuntu.com/ubuntu jammy-updates/main amd64 python3-lib2to3 all 3.10.8-1~22.04 [77.6 kB]
+Get:79 http://archive.ubuntu.com/ubuntu jammy-updates/main amd64 python3-distutils all 3.10.8-1~22.04 [139 kB]
+Get:80 http://archive.ubuntu.com/ubuntu jammy/main amd64 python3-markupsafe amd64 2.0.1-2build1 [12.7 kB]
+Get:81 http://archive.ubuntu.com/ubuntu jammy-updates/main amd64 python3-jinja2 all 3.0.3-1ubuntu0.2 [108 kB]
+Get:82 http://archive.ubuntu.com/ubuntu jammy/main amd64 python3-json-pointer all 2.0-0ubuntu1 [8320 B]
+Get:83 http://archive.ubuntu.com/ubuntu jammy/main amd64 python3-jsonpatch all 1.32-2 [12.7 kB]
+Get:84 http://archive.ubuntu.com/ubuntu jammy-updates/main amd64 python3-setuptools all 59.6.0-1.2ubuntu0.22.04.2 [340 kB]
+Get:85 http://archive.ubuntu.com/ubuntu jammy/main amd64 python3-pyrsistent amd64 0.18.1-1build1 [55.5 kB]
+Get:86 http://archive.ubuntu.com/ubuntu jammy/main amd64 python3-jsonschema all 3.2.0-0ubuntu2 [43.1 kB]
+Get:87 http://archive.ubuntu.com/ubuntu jammy-updates/main amd64 python3-urllib3 all 1.26.5-1~exp1ubuntu0.2 [98.3 kB]
+Get:88 http://archive.ubuntu.com/ubuntu jammy-updates/main amd64 python3-requests all 2.25.1+dfsg-2ubuntu0.1 [48.8 kB]
+Get:89 http://archive.ubuntu.com/ubuntu jammy/main amd64 python3-serial all 3.5-1 [78.7 kB]
+Get:90 http://archive.ubuntu.com/ubuntu jammy-updates/main amd64 snapd amd64 2.65.3+22.04 [26.4 MB]
+Get:91 http://archive.ubuntu.com/ubuntu jammy/main amd64 libegl1 amd64 1.4.0-1 [28.6 kB]
+Get:92 http://archive.ubuntu.com/ubuntu jammy-updates/main amd64 wsl-setup amd64 0.5.4~22.04 [4034 B]
+Get:93 http://archive.ubuntu.com/ubuntu jammy-updates/main amd64 ubuntu-wsl amd64 1.481.4 [2876 B]
+Get:94 http://archive.ubuntu.com/ubuntu jammy/main amd64 gdisk amd64 1.0.8-4build1 [240 kB]
+Get:95 http://archive.ubuntu.com/ubuntu jammy/main amd64 cloud-guest-utils all 0.32-22-g45fe84a5-0ubuntu1 [18.5 kB]
+Get:96 http://archive.ubuntu.com/ubuntu jammy-updates/main amd64 cloud-init all 24.3.1-0ubuntu0~22.04.1 [564 kB]
+Get:97 https://repo.mongodb.org/apt/ubuntu jammy/mongodb-org/7.0/multiverse amd64 mongodb-org-database-tools-extra amd64 7.0.15 [7780 B]
+Get:98 https://repo.mongodb.org/apt/ubuntu jammy/mongodb-org/7.0/multiverse amd64 mongodb-org-database amd64 7.0.15 [3424 B]
+Get:99 https://repo.mongodb.org/apt/ubuntu jammy/mongodb-org/7.0/multiverse amd64 mongodb-org-tools amd64 7.0.15 [2772 B]
+Fetched 294 MB in 15s (19.5 MB/s)
+Extracting templates from packages: 100%
+Preconfiguring packages ...
+(Reading database ... 47341 files and directories currently installed.)
+Preparing to unpack .../motd-news-config_12ubuntu4.7_all.deb ...
+Unpacking motd-news-config (12ubuntu4.7) over (12ubuntu4.6) ...
+Preparing to unpack .../base-files_12ubuntu4.7_amd64.deb ...
+Unpacking base-files (12ubuntu4.7) over (12ubuntu4.6) ...
+Setting up base-files (12ubuntu4.7) ...
+Installing new version of config file /etc/issue ...
+Installing new version of config file /etc/issue.net ...
+Installing new version of config file /etc/lsb-release ...
+motd-news.service is a disabled or a static unit not running, not starting it.
+(Reading database ... 47341 files and directories currently installed.)
+Preparing to unpack .../libapt-pkg6.0_2.4.13_amd64.deb ...
+Unpacking libapt-pkg6.0:amd64 (2.4.13) over (2.4.12) ...
+Setting up libapt-pkg6.0:amd64 (2.4.13) ...
+(Reading database ... 47341 files and directories currently installed.)
+Preparing to unpack .../archives/apt_2.4.13_amd64.deb ...
+Unpacking apt (2.4.13) over (2.4.12) ...
+Setting up apt (2.4.13) ...
+(Reading database ... 47341 files and directories currently installed.)
+Preparing to unpack .../00-apt-utils_2.4.13_amd64.deb ...
+Unpacking apt-utils (2.4.13) over (2.4.12) ...
+Preparing to unpack .../01-distro-info-data_0.52ubuntu0.8_all.deb ...
+Unpacking distro-info-data (0.52ubuntu0.8) over (0.52ubuntu0.7) ...
+Preparing to unpack .../02-python-apt-common_2.4.0ubuntu4_all.deb ...
+Unpacking python-apt-common (2.4.0ubuntu4) over (2.4.0ubuntu3) ...
+Preparing to unpack .../03-python3-apt_2.4.0ubuntu4_amd64.deb ...
+Unpacking python3-apt (2.4.0ubuntu4) over (2.4.0ubuntu3) ...
+Preparing to unpack .../04-ubuntu-pro-client-l10n_34~22.04_amd64.deb ...
+Unpacking ubuntu-pro-client-l10n (34~22.04) over (33.2~22.04) ...
+Preparing to unpack .../05-ubuntu-pro-client_34~22.04_amd64.deb ...
+Unpacking ubuntu-pro-client (34~22.04) over (33.2~22.04) ...
+Preparing to unpack .../06-ubuntu-advantage-tools_34~22.04_all.deb ...
+Unpacking ubuntu-advantage-tools (34~22.04) over (33.2~22.04) ...
+Preparing to unpack .../07-xxd_2%3a8.2.3995-1ubuntu2.20_amd64.deb ...
+Unpacking xxd (2:8.2.3995-1ubuntu2.20) over (2:8.2.3995-1ubuntu2.19) ...
+Preparing to unpack .../08-vim_2%3a8.2.3995-1ubuntu2.20_amd64.deb ...
+Unpacking vim (2:8.2.3995-1ubuntu2.20) over (2:8.2.3995-1ubuntu2.19) ...
+Preparing to unpack .../09-vim-tiny_2%3a8.2.3995-1ubuntu2.20_amd64.deb ...
+Unpacking vim-tiny (2:8.2.3995-1ubuntu2.20) over (2:8.2.3995-1ubuntu2.19) ...
+Preparing to unpack .../10-vim-runtime_2%3a8.2.3995-1ubuntu2.20_all.deb ...
+Unpacking vim-runtime (2:8.2.3995-1ubuntu2.20) over (2:8.2.3995-1ubuntu2.19) ...
+Preparing to unpack .../11-vim-common_2%3a8.2.3995-1ubuntu2.20_all.deb ...
+Unpacking vim-common (2:8.2.3995-1ubuntu2.20) over (2:8.2.3995-1ubuntu2.19) ...
+Preparing to unpack .../12-ubuntu-minimal_1.481.4_amd64.deb ...
+Unpacking ubuntu-minimal (1.481.4) over (1.481.3) ...
+Preparing to unpack .../13-libpcap0.8_1.10.1-4ubuntu1.22.04.1_amd64.deb ...
+Unpacking libpcap0.8:amd64 (1.10.1-4ubuntu1.22.04.1) over (1.10.1-4build1) ...
+Preparing to unpack .../14-nano_6.2-1ubuntu0.1_amd64.deb ...
+Unpacking nano (6.2-1ubuntu0.1) over (6.2-1) ...
+Preparing to unpack .../15-ubuntu-release-upgrader-core_1%3a22.04.20_all.deb ...
+Unpacking ubuntu-release-upgrader-core (1:22.04.20) over (1:22.04.19) ...
+Preparing to unpack .../16-python3-distupgrade_1%3a22.04.20_all.deb ...
+Unpacking python3-distupgrade (1:22.04.20) over (1:22.04.19) ...
+Preparing to unpack .../17-python3-update-manager_1%3a22.04.21_all.deb ...
+Unpacking python3-update-manager (1:22.04.21) over (1:22.04.10) ...
+Preparing to unpack .../18-update-manager-core_1%3a22.04.21_all.deb ...
+Unpacking update-manager-core (1:22.04.21) over (1:22.04.10) ...
+Preparing to unpack .../19-ubuntu-standard_1.481.4_amd64.deb ...
+Unpacking ubuntu-standard (1.481.4) over (1.481.3) ...
+Selecting previously unselected package bc.
+Preparing to unpack .../20-bc_1.07.1-3build1_amd64.deb ...
+Unpacking bc (1.07.1-3build1) ...
+Selecting previously unselected package libeatmydata1:amd64.
+Preparing to unpack .../21-libeatmydata1_130-2build1_amd64.deb ...
+Unpacking libeatmydata1:amd64 (130-2build1) ...
+Selecting previously unselected package eatmydata.
+Preparing to unpack .../22-eatmydata_130-2build1_all.deb ...
+Unpacking eatmydata (130-2build1) ...
+Selecting previously unselected package libfdisk1:amd64.
+Preparing to unpack .../23-libfdisk1_2.37.2-4ubuntu3.4_amd64.deb ...
+Unpacking libfdisk1:amd64 (2.37.2-4ubuntu3.4) ...
+Selecting previously unselected package fdisk.
+Preparing to unpack .../24-fdisk_2.37.2-4ubuntu3.4_amd64.deb ...
+Unpacking fdisk (2.37.2-4ubuntu3.4) ...
+Selecting previously unselected package python3-bcrypt.
+Preparing to unpack .../25-python3-bcrypt_3.2.0-1build1_amd64.deb ...
+Unpacking python3-bcrypt (3.2.0-1build1) ...
+Selecting previously unselected package python3-hamcrest.
+Preparing to unpack .../26-python3-hamcrest_2.0.2-2_all.deb ...
+Unpacking python3-hamcrest (2.0.2-2) ...
+Selecting previously unselected package python3-idna.
+Preparing to unpack .../27-python3-idna_3.3-1ubuntu0.1_all.deb ...
+Unpacking python3-idna (3.3-1ubuntu0.1) ...
+Selecting previously unselected package python3-openssl.
+Preparing to unpack .../28-python3-openssl_21.0.0-1_all.deb ...
+Unpacking python3-openssl (21.0.0-1) ...
+Selecting previously unselected package python3-attr.
+Preparing to unpack .../29-python3-attr_21.2.0-1_all.deb ...
+Unpacking python3-attr (21.2.0-1) ...
+Selecting previously unselected package python3-pyasn1.
+Preparing to unpack .../30-python3-pyasn1_0.4.8-1_all.deb ...
+Unpacking python3-pyasn1 (0.4.8-1) ...
+Selecting previously unselected package python3-pyasn1-modules.
+Preparing to unpack .../31-python3-pyasn1-modules_0.2.1-1_all.deb ...
+Unpacking python3-pyasn1-modules (0.2.1-1) ...
+Selecting previously unselected package python3-service-identity.
+Preparing to unpack .../32-python3-service-identity_18.1.0-6_all.deb ...
+Unpacking python3-service-identity (18.1.0-6) ...
+Selecting previously unselected package python3-automat.
+Preparing to unpack .../33-python3-automat_20.2.0-1_all.deb ...
+Unpacking python3-automat (20.2.0-1) ...
+Selecting previously unselected package python3-constantly.
+Preparing to unpack .../34-python3-constantly_15.1.0-2_all.deb ...
+Unpacking python3-constantly (15.1.0-2) ...
+Selecting previously unselected package python3-hyperlink.
+Preparing to unpack .../35-python3-hyperlink_21.0.0-3_all.deb ...
+Unpacking python3-hyperlink (21.0.0-3) ...
+Selecting previously unselected package python3-incremental.
+Preparing to unpack .../36-python3-incremental_21.3.0-1_all.deb ...
+Unpacking python3-incremental (21.3.0-1) ...
+Selecting previously unselected package python3-zope.interface.
+Preparing to unpack .../37-python3-zope.interface_5.4.0-1build1_amd64.deb ...
+Unpacking python3-zope.interface (5.4.0-1build1) ...
+Selecting previously unselected package python3-twisted.
+Preparing to unpack .../38-python3-twisted_22.1.0-2ubuntu2.5_all.deb ...
+Unpacking python3-twisted (22.1.0-2ubuntu2.5) ...
+Selecting previously unselected package python3-configobj.
+Preparing to unpack .../39-python3-configobj_5.0.6-5ubuntu0.1_all.deb ...
+Unpacking python3-configobj (5.0.6-5ubuntu0.1) ...
+Selecting previously unselected package landscape-common.
+Preparing to unpack .../40-landscape-common_23.02-0ubuntu1~22.04.3_amd64.deb ...
+Unpacking landscape-common (23.02-0ubuntu1~22.04.3) ...
+Selecting previously unselected package python3-pycurl.
+Preparing to unpack .../41-python3-pycurl_7.44.1-4build1_amd64.deb ...
+Unpacking python3-pycurl (7.44.1-4build1) ...
+Selecting previously unselected package landscape-client.
+Preparing to unpack .../42-landscape-client_23.02-0ubuntu1~22.04.3_amd64.deb ...
+Unpacking landscape-client (23.02-0ubuntu1~22.04.3) ...
+Selecting previously unselected package libcolord2:amd64.
+Preparing to unpack .../43-libcolord2_1.4.6-1_amd64.deb ...
+Unpacking libcolord2:amd64 (1.4.6-1) ...
+Selecting previously unselected package libwayland-server0:amd64.
+Preparing to unpack .../44-libwayland-server0_1.20.0-1ubuntu0.1_amd64.deb ...
+Unpacking libwayland-server0:amd64 (1.20.0-1ubuntu0.1) ...
+Selecting previously unselected package libgbm1:amd64.
+Preparing to unpack .../45-libgbm1_23.2.1-1ubuntu3.1~22.04.2_amd64.deb ...
+Unpacking libgbm1:amd64 (23.2.1-1ubuntu3.1~22.04.2) ...
+Selecting previously unselected package libwayland-client0:amd64.
+Preparing to unpack .../46-libwayland-client0_1.20.0-1ubuntu0.1_amd64.deb ...
+Unpacking libwayland-client0:amd64 (1.20.0-1ubuntu0.1) ...
+Selecting previously unselected package libegl-mesa0:amd64.
+Preparing to unpack .../47-libegl-mesa0_23.2.1-1ubuntu3.1~22.04.2_amd64.deb ...
+Unpacking libegl-mesa0:amd64 (23.2.1-1ubuntu3.1~22.04.2) ...
+Selecting previously unselected package libepoxy0:amd64.
+Preparing to unpack .../48-libepoxy0_1.5.10-1_amd64.deb ...
+Unpacking libepoxy0:amd64 (1.5.10-1) ...
+Preparing to unpack .../49-libgd3_2.3.0-2ubuntu2.3_amd64.deb ...
+Unpacking libgd3:amd64 (2.3.0-2ubuntu2.3) over (2.3.0-2ubuntu2) ...
+Selecting previously unselected package libwayland-cursor0:amd64.
+Preparing to unpack .../50-libwayland-cursor0_1.20.0-1ubuntu0.1_amd64.deb ...
+Unpacking libwayland-cursor0:amd64 (1.20.0-1ubuntu0.1) ...
+Selecting previously unselected package libwayland-egl1:amd64.
+Preparing to unpack .../51-libwayland-egl1_1.20.0-1ubuntu0.1_amd64.deb ...
+Unpacking libwayland-egl1:amd64 (1.20.0-1ubuntu0.1) ...
+Selecting previously unselected package libxkbcommon0:amd64.
+Preparing to unpack .../52-libxkbcommon0_1.4.0-1_amd64.deb ...
+Unpacking libxkbcommon0:amd64 (1.4.0-1) ...
+Selecting previously unselected package libgtk-3-common.
+Preparing to unpack .../53-libgtk-3-common_3.24.33-1ubuntu2.2_all.deb ...
+Unpacking libgtk-3-common (3.24.33-1ubuntu2.2) ...
+Selecting previously unselected package libgtk-3-0:amd64.
+Preparing to unpack .../54-libgtk-3-0_3.24.33-1ubuntu2.2_amd64.deb ...
+Unpacking libgtk-3-0:amd64 (3.24.33-1ubuntu2.2) ...
+Selecting previously unselected package libgtk-3-bin.
+Preparing to unpack .../55-libgtk-3-bin_3.24.33-1ubuntu2.2_amd64.deb ...
+Unpacking libgtk-3-bin (3.24.33-1ubuntu2.2) ...
+Preparing to unpack .../56-linux-libc-dev_5.15.0-125.135_amd64.deb ...
+Unpacking linux-libc-dev:amd64 (5.15.0-125.135) over (5.15.0-122.132) ...
+Preparing to unpack .../57-mongodb-mongosh_2.3.3_amd64.deb ...
+Unpacking mongodb-mongosh (2.3.3) over (2.3.0) ...
+Preparing to unpack .../58-mongodb-org-shell_7.0.15_amd64.deb ...
+Unpacking mongodb-org-shell (7.0.15) over (7.0.14) ...
+Preparing to unpack .../59-mongodb-org-server_7.0.15_amd64.deb ...
+Unpacking mongodb-org-server (7.0.15) over (7.0.14) ...
+Preparing to unpack .../60-mongodb-org-mongos_7.0.15_amd64.deb ...
+Unpacking mongodb-org-mongos (7.0.15) over (7.0.14) ...
+Preparing to unpack .../61-mongodb-org-database-tools-extra_7.0.15_amd64.deb ...
+Unpacking mongodb-org-database-tools-extra (7.0.15) over (7.0.14) ...
+Preparing to unpack .../62-mongodb-org-database_7.0.15_amd64.deb ...
+Unpacking mongodb-org-database (7.0.15) over (7.0.14) ...
+Preparing to unpack .../63-mongodb-org-tools_7.0.15_amd64.deb ...
+Unpacking mongodb-org-tools (7.0.15) over (7.0.14) ...
+Preparing to unpack .../64-openjdk-17-jdk_17.0.13+11-2ubuntu1~22.04_amd64.deb ...
+Unpacking openjdk-17-jdk:amd64 (17.0.13+11-2ubuntu1~22.04) over (17.0.12+7-1ubuntu2~22.04) ...
+Preparing to unpack .../65-openjdk-17-jdk-headless_17.0.13+11-2ubuntu1~22.04_amd64.deb ...
+Unpacking openjdk-17-jdk-headless:amd64 (17.0.13+11-2ubuntu1~22.04) over (17.0.12+7-1ubuntu2~22.04) ...
+Preparing to unpack .../66-openjdk-17-jre_17.0.13+11-2ubuntu1~22.04_amd64.deb ...
+Unpacking openjdk-17-jre:amd64 (17.0.13+11-2ubuntu1~22.04) over (17.0.12+7-1ubuntu2~22.04) ...
+Preparing to unpack .../67-openjdk-17-jre-headless_17.0.13+11-2ubuntu1~22.04_amd64.deb ...
+Unpacking openjdk-17-jre-headless:amd64 (17.0.13+11-2ubuntu1~22.04) over (17.0.12+7-1ubuntu2~22.04) ...
+Selecting previously unselected package python-babel-localedata.
+Preparing to unpack .../68-python-babel-localedata_2.8.0+dfsg.1-7_all.deb ...
+Unpacking python-babel-localedata (2.8.0+dfsg.1-7) ...
+Selecting previously unselected package python3-tz.
+Preparing to unpack .../69-python3-tz_2022.1-1ubuntu0.22.04.1_all.deb ...
+Unpacking python3-tz (2022.1-1ubuntu0.22.04.1) ...
+Selecting previously unselected package python3-babel.
+Preparing to unpack .../70-python3-babel_2.8.0+dfsg.1-7_all.deb ...
+Unpacking python3-babel (2.8.0+dfsg.1-7) ...
+Selecting previously unselected package python3-certifi.
+Preparing to unpack .../71-python3-certifi_2020.6.20-1_all.deb ...
+Unpacking python3-certifi (2020.6.20-1) ...
+Selecting previously unselected package python3-chardet.
+Preparing to unpack .../72-python3-chardet_4.0.0-1_all.deb ...
+Unpacking python3-chardet (4.0.0-1) ...
+Selecting previously unselected package python3-colorama.
+Preparing to unpack .../73-python3-colorama_0.4.4-1_all.deb ...
+Unpacking python3-colorama (0.4.4-1) ...
+Selecting previously unselected package python3-click.
+Preparing to unpack .../74-python3-click_8.0.3-1_all.deb ...
+Unpacking python3-click (8.0.3-1) ...
+Selecting previously unselected package python3-debconf.
+Preparing to unpack .../75-python3-debconf_1.5.79ubuntu1_all.deb ...
+Unpacking python3-debconf (1.5.79ubuntu1) ...
+Selecting previously unselected package python3-lib2to3.
+Preparing to unpack .../76-python3-lib2to3_3.10.8-1~22.04_all.deb ...
+Unpacking python3-lib2to3 (3.10.8-1~22.04) ...
+Selecting previously unselected package python3-distutils.
+Preparing to unpack .../77-python3-distutils_3.10.8-1~22.04_all.deb ...
+Unpacking python3-distutils (3.10.8-1~22.04) ...
+Selecting previously unselected package python3-markupsafe.
+Preparing to unpack .../78-python3-markupsafe_2.0.1-2build1_amd64.deb ...
+Unpacking python3-markupsafe (2.0.1-2build1) ...
+Selecting previously unselected package python3-jinja2.
+Preparing to unpack .../79-python3-jinja2_3.0.3-1ubuntu0.2_all.deb ...
+Unpacking python3-jinja2 (3.0.3-1ubuntu0.2) ...
+Selecting previously unselected package python3-json-pointer.
+Preparing to unpack .../80-python3-json-pointer_2.0-0ubuntu1_all.deb ...
+Unpacking python3-json-pointer (2.0-0ubuntu1) ...
+Selecting previously unselected package python3-jsonpatch.
+Preparing to unpack .../81-python3-jsonpatch_1.32-2_all.deb ...
+Unpacking python3-jsonpatch (1.32-2) ...
+Selecting previously unselected package python3-setuptools.
+Preparing to unpack .../82-python3-setuptools_59.6.0-1.2ubuntu0.22.04.2_all.deb ...
+Unpacking python3-setuptools (59.6.0-1.2ubuntu0.22.04.2) ...
+Selecting previously unselected package python3-pyrsistent:amd64.
+Preparing to unpack .../83-python3-pyrsistent_0.18.1-1build1_amd64.deb ...
+Unpacking python3-pyrsistent:amd64 (0.18.1-1build1) ...
+Selecting previously unselected package python3-jsonschema.
+Preparing to unpack .../84-python3-jsonschema_3.2.0-0ubuntu2_all.deb ...
+Unpacking python3-jsonschema (3.2.0-0ubuntu2) ...
+Selecting previously unselected package python3-urllib3.
+Preparing to unpack .../85-python3-urllib3_1.26.5-1~exp1ubuntu0.2_all.deb ...
+Unpacking python3-urllib3 (1.26.5-1~exp1ubuntu0.2) ...
+Selecting previously unselected package python3-requests.
+Preparing to unpack .../86-python3-requests_2.25.1+dfsg-2ubuntu0.1_all.deb ...
+Unpacking python3-requests (2.25.1+dfsg-2ubuntu0.1) ...
+Selecting previously unselected package python3-serial.
+Preparing to unpack .../87-python3-serial_3.5-1_all.deb ...
+Unpacking python3-serial (3.5-1) ...
+Preparing to unpack .../88-snapd_2.65.3+22.04_amd64.deb ...
+Unpacking snapd (2.65.3+22.04) over (2.63+22.04ubuntu0.1) ...
+Selecting previously unselected package libegl1:amd64.
+Preparing to unpack .../89-libegl1_1.4.0-1_amd64.deb ...
+Unpacking libegl1:amd64 (1.4.0-1) ...
+Preparing to unpack .../90-wsl-setup_0.5.4~22.04_amd64.deb ...
+Unpacking wsl-setup (0.5.4~22.04) over (0.2) ...
+Preparing to unpack .../91-ubuntu-wsl_1.481.4_amd64.deb ...
+Unpacking ubuntu-wsl (1.481.4) over (1.481.3) ...
+Selecting previously unselected package gdisk.
+Preparing to unpack .../92-gdisk_1.0.8-4build1_amd64.deb ...
+Unpacking gdisk (1.0.8-4build1) ...
+Selecting previously unselected package cloud-guest-utils.
+Preparing to unpack .../93-cloud-guest-utils_0.32-22-g45fe84a5-0ubuntu1_all.deb ...
+Unpacking cloud-guest-utils (0.32-22-g45fe84a5-0ubuntu1) ...
+Selecting previously unselected package cloud-init.
+Preparing to unpack .../94-cloud-init_24.3.1-0ubuntu0~22.04.1_all.deb ...
+Unpacking cloud-init (24.3.1-0ubuntu0~22.04.1) ...
+Setting up mongodb-mongosh (2.3.3) ...
+Setting up motd-news-config (12ubuntu4.7) ...
+Setting up wsl-setup (0.5.4~22.04) ...
+Setting up snapd (2.65.3+22.04) ...
+Installing new version of config file /etc/apparmor.d/usr.lib.snapd.snap-confine.real ...
+snapd.failure.service is a disabled or a static unit not running, not starting it.
+snapd.snap-repair.service is a disabled or a static unit not running, not starting it.
+Setting up python3-attr (21.2.0-1) ...
+Setting up libwayland-server0:amd64 (1.20.0-1ubuntu0.1) ...
+Setting up apt-utils (2.4.13) ...
+Setting up libgbm1:amd64 (23.2.1-1ubuntu3.1~22.04.2) ...
+Setting up python3-colorama (0.4.4-1) ...
+Setting up python3-zope.interface (5.4.0-1build1) ...
+Setting up distro-info-data (0.52ubuntu0.8) ...
+Setting up python3-openssl (21.0.0-1) ...
+Setting up python3-bcrypt (3.2.0-1build1) ...
+Setting up mongodb-org-server (7.0.15) ...
+Setting up python3-automat (20.2.0-1) ...
+Setting up python3-debconf (1.5.79ubuntu1) ...
+Setting up linux-libc-dev:amd64 (5.15.0-125.135) ...
+Setting up bc (1.07.1-3build1) ...
+Setting up python3-hamcrest (2.0.2-2) ...
+Setting up ubuntu-standard (1.481.4) ...
+Setting up python3-click (8.0.3-1) ...
+Setting up python3-markupsafe (2.0.1-2build1) ...
+Setting up libcolord2:amd64 (1.4.6-1) ...
+Setting up xxd (2:8.2.3995-1ubuntu2.20) ...
+Setting up python3-tz (2022.1-1ubuntu0.22.04.1) ...
+Setting up python-babel-localedata (2.8.0+dfsg.1-7) ...
+Setting up python3-serial (3.5-1) ...
+Setting up gdisk (1.0.8-4build1) ...
+Setting up mongodb-org-shell (7.0.15) ...
+Setting up python3-pycurl (7.44.1-4build1) ...
+Setting up python3-chardet (4.0.0-1) ...
+Setting up python3-configobj (5.0.6-5ubuntu0.1) ...
+Setting up vim-common (2:8.2.3995-1ubuntu2.20) ...
+Setting up libpcap0.8:amd64 (1.10.1-4ubuntu1.22.04.1) ...
+Setting up python3-certifi (2020.6.20-1) ...
+Setting up libepoxy0:amd64 (1.5.10-1) ...
+Setting up python3-incremental (21.3.0-1) ...
+Setting up libgd3:amd64 (2.3.0-2ubuntu2.3) ...
+Setting up python3-idna (3.3-1ubuntu0.1) ...
+Setting up mongodb-org-mongos (7.0.15) ...
+Setting up mongodb-org-database-tools-extra (7.0.15) ...
+Setting up python3-urllib3 (1.26.5-1~exp1ubuntu0.2) ...
+Setting up libfdisk1:amd64 (2.37.2-4ubuntu3.4) ...
+Setting up openjdk-17-jre-headless:amd64 (17.0.13+11-2ubuntu1~22.04) ...
+Installing new version of config file /etc/java-17-openjdk/net.properties ...
+Installing new version of config file /etc/java-17-openjdk/security/java.policy ...
+Installing new version of config file /etc/java-17-openjdk/security/java.security ...
+Setting up nano (6.2-1ubuntu0.1) ...
+Setting up python3-pyrsistent:amd64 (0.18.1-1build1) ...
+Setting up python-apt-common (2.4.0ubuntu4) ...
+Setting up python3-json-pointer (2.0-0ubuntu1) ...
+Setting up libeatmydata1:amd64 (130-2build1) ...
+Setting up python3-pyasn1 (0.4.8-1) ...
+Setting up python3-constantly (15.1.0-2) ...
+Setting up libwayland-egl1:amd64 (1.20.0-1ubuntu0.1) ...
+Setting up vim-runtime (2:8.2.3995-1ubuntu2.20) ...
+Setting up python3-lib2to3 (3.10.8-1~22.04) ...
+Setting up cloud-guest-utils (0.32-22-g45fe84a5-0ubuntu1) ...
+Setting up libgtk-3-common (3.24.33-1ubuntu2.2) ...
+Setting up libxkbcommon0:amd64 (1.4.0-1) ...
+Setting up libwayland-client0:amd64 (1.20.0-1ubuntu0.1) ...
+Setting up python3-distutils (3.10.8-1~22.04) ...
+Setting up eatmydata (130-2build1) ...
+Setting up vim (2:8.2.3995-1ubuntu2.20) ...
+Setting up python3-setuptools (59.6.0-1.2ubuntu0.22.04.2) ...
+Setting up python3-babel (2.8.0+dfsg.1-7) ...
+update-alternatives: using /usr/bin/pybabel-python3 to provide /usr/bin/pybabel (pybabel) in auto mode
+Setting up mongodb-org-database (7.0.15) ...
+Setting up python3-apt (2.4.0ubuntu4) ...
+Setting up openjdk-17-jre:amd64 (17.0.13+11-2ubuntu1~22.04) ...
+Setting up python3-jsonpatch (1.32-2) ...
+update-alternatives: using /usr/bin/json-patch-jsondiff to provide /usr/bin/jsondiff (jsondiff) in auto mode
+Setting up vim-tiny (2:8.2.3995-1ubuntu2.20) ...
+Setting up fdisk (2.37.2-4ubuntu3.4) ...
+Setting up python3-jinja2 (3.0.3-1ubuntu0.2) ...
+Setting up libegl-mesa0:amd64 (23.2.1-1ubuntu3.1~22.04.2) ...
+Setting up python3-jsonschema (3.2.0-0ubuntu2) ...
+Setting up python3-pyasn1-modules (0.2.1-1) ...
+Setting up openjdk-17-jdk-headless:amd64 (17.0.13+11-2ubuntu1~22.04) ...
+Setting up python3-requests (2.25.1+dfsg-2ubuntu0.1) ...
+Setting up python3-hyperlink (21.0.0-3) ...
+Setting up mongodb-org-tools (7.0.15) ...
+Setting up python3-service-identity (18.1.0-6) ...
+Setting up libwayland-cursor0:amd64 (1.20.0-1ubuntu0.1) ...
+Setting up libegl1:amd64 (1.4.0-1) ...
+Setting up ubuntu-pro-client (34~22.04) ...
+Installing new version of config file /etc/apt/apt.conf.d/20apt-esm-hook.conf ...
+Setting up ubuntu-pro-client-l10n (34~22.04) ...
+Setting up cloud-init (24.3.1-0ubuntu0~22.04.1) ...
+No diversion 'diversion of /etc/init/ureadahead.conf to /etc/init/ureadahead.conf.disabled by cloud-init', none removed.
+Created symlink /etc/systemd/system/cloud-init.target.wants/cloud-config.service → /lib/systemd/system/cloud-config.service.
+Created symlink /etc/systemd/system/cloud-init.target.wants/cloud-final.service → /lib/systemd/system/cloud-final.service.
+Created symlink /etc/systemd/system/cloud-config.target.wants/cloud-init-hotplugd.socket → /lib/systemd/system/cloud-init-hotplugd.socket.
+Created symlink /etc/systemd/system/cloud-init.target.wants/cloud-init-local.service → /lib/systemd/system/cloud-init-local.service.
+Created symlink /etc/systemd/system/cloud-init.target.wants/cloud-init.service → /lib/systemd/system/cloud-init.service.
+Setting up openjdk-17-jdk:amd64 (17.0.13+11-2ubuntu1~22.04) ...
+Setting up python3-twisted (22.1.0-2ubuntu2.5) ...
+Setting up ubuntu-advantage-tools (34~22.04) ...
+Setting up ubuntu-minimal (1.481.4) ...
+Setting up landscape-common (23.02-0ubuntu1~22.04.3) ...
+Welcome to Ubuntu 22.04.5 LTS (GNU/Linux 5.15.167.4-microsoft-standard-WSL2 x86_64)
+
+ * Documentation:  https://help.ubuntu.com
+ * Management:     https://landscape.canonical.com
+ * Support:        https://ubuntu.com/pro
+
+ System information as of Sun Nov 17 11:23:18 EST 2024
+
+  System load:  1.05                Processes:             73
+  Usage of /:   3.3% of 1006.85GB   Users logged in:       1
+  Memory usage: 24%                 IPv4 address for eth0: 172.27.104.142
+  Swap usage:   0%
+
+ * Strictly confined Kubernetes makes edge and IoT secure. Learn how MicroK8s
+   just raised the bar for easy, resilient and secure K8s cluster deployment.
+
+   https://ubuntu.com/engage/secure-kubernetes-at-the-edge
+New release '24.04.1 LTS' available.
+Run 'do-release-upgrade' to upgrade to it.
+
+Setting up landscape-client (23.02-0ubuntu1~22.04.3) ...
+Created symlink /etc/systemd/system/multi-user.target.wants/landscape-client.service → /lib/systemd/system/landscape-client.service.
+Setting up python3-update-manager (1:22.04.21) ...
+Setting up python3-distupgrade (1:22.04.20) ...
+Setting up ubuntu-release-upgrader-core (1:22.04.20) ...
+Setting up update-manager-core (1:22.04.21) ...
+Processing triggers for install-info (6.8-4build1) ...
+Processing triggers for hicolor-icon-theme (0.17-2) ...
+Processing triggers for libglib2.0-0:amd64 (2.72.4-0ubuntu2.3) ...
+Setting up libgtk-3-0:amd64 (3.24.33-1ubuntu2.2) ...
+Setting up ubuntu-wsl (1.481.4) ...
+Processing triggers for libc-bin (2.35-0ubuntu3.8) ...
+Processing triggers for rsyslog (8.2112.0-2ubuntu2.2) ...
+Setting up libgtk-3-bin (3.24.33-1ubuntu2.2) ...
+Processing triggers for man-db (2.10.2-1) ...
+Processing triggers for plymouth-theme-ubuntu-text (0.9.5+git20211018-1ubuntu3) ...
+Processing triggers for dbus (1.12.20-2ubuntu4.1) ...
+(Assign_3) uddeep@WIN-7MM1H8MLONC:~/NLP_Assignment3/wikiextract$ python --versio
+Unknown option: --
+usage: python [option] ... [-c cmd | -m mod | file | -] [arg] ...
+Try `python -h' for more information.
+(Assign_3) uddeep@WIN-7MM1H8MLONC:~/NLP_Assignment3/wikiextract$ python --version
+Python 2.7.18 :: Anaconda, Inc.
+(Assign_3) uddeep@WIN-7MM1H8MLONC:~/NLP_Assignment3/wikiextract$ python WikiExtractor.py --quiet --no_templates --filter_disambig_pages   --min_text_length
+20   $HIWIKI_FILE -b 5G -o -
+usage: WikiExtractor.py [-h] [-o OUTPUT] [-b n[KMG]] [-c] [--json] [--html]
+                        [-l] [-s] [--lists] [-ns ns1,ns2]
+                        [--templates TEMPLATES] [--no_templates] [-r]
+                        [--min_text_length MIN_TEXT_LENGTH]
+                        [--filter_disambig_pages] [-it abbr,b,big]
+                        [-de gallery,timeline,noinclude] [--keep_tables]
+                        [--processes PROCESSES] [-q] [--debug] [-a]
+                        [--log_file LOG_FILE] [-v]
+                        [--filter_category FILTER_CATEGORY]
+                        input
+WikiExtractor.py: error: too few arguments
+(Assign_3) uddeep@WIN-7MM1H8MLONC:~/NLP_Assignment3/wikiextract$ bash run_hiwiki.sh
++ SEED=42
++ OUTPUT_SENT=1000000
++ HIWIKI_FILE=hiwiki-pages-meta-current.xml
++ EXTRACTED_FILE=extracted
++ EXTRACT_TEXT='python3 WikiExtractor.py --quiet --no_templates --filter_disambig_pages   --min_text_length 20   $HIWIKI_FILE -b 5G -o -'
++ TOKENIZE_SENTENCE='python3 indic_sentence_tokenizer.py'
++ SELECT_RANDOM_SENTENCE='shuf -n $OUTPUT_SENT --random-source=<(get_seeded_random $SEED)'
++ INSERT_ERRORS='python3 insert_errors.py hindi.output  --single --edits'
++ '[' '!' -f extracted ']'
++ '[' -f extracted ']'
++ '[' '!' -f hindi-pos-tagger-3.0/hindi.input.txt ']'
++ '[' -f hindi-pos-tagger-3.0/hindi.input.txt ']'
++ '[' '!' -f hindi.output ']'
++ eval 'python3 insert_errors.py hindi.output  --single --edits>hiwiki.augmented.edits'
+++ python3 insert_errors.py hindi.output --single --edits
+Traceback (most recent call last):
+  File "/home/uddeep/NLP_Assignment3/wikiextract/insert_errors.py", line 200, in <module>
+    main(parser_args)
+  File "/home/uddeep/NLP_Assignment3/wikiextract/insert_errors.py", line 176, in main
+    sentence_tagged = pos_tag(sentence)
+                      ^^^^^^^^^^^^^^^^^
+  File "/home/uddeep/NLP_Assignment3/wikiextract/insert_errors.py", line 72, in pos_tag
+    tags.append(components[2])
+                ~~~~~~~~~~^^^
+IndexError: list index out of range
+(Assign_3) uddeep@WIN-7MM1H8MLONC:~/NLP_Assignment3/wikiextract$ bash run_hiwiki.sh
++ SEED=42
++ OUTPUT_SENT=1000000
++ HIWIKI_FILE=hiwiki-pages-meta-current.xml
++ EXTRACTED_FILE=extracted
++ EXTRACT_TEXT='python3 WikiExtractor.py --quiet --no_templates --filter_disambig_pages   --min_text_length 20   $HIWIKI_FILE -b 5G -o -'
++ TOKENIZE_SENTENCE='python3 indic_sentence_tokenizer.py'
++ SELECT_RANDOM_SENTENCE='shuf -n $OUTPUT_SENT --random-source=<(get_seeded_random $SEED)'
++ INSERT_ERRORS='python3 insert_errors.py hindi.output  --single --edits'
++ '[' '!' -f extracted ']'
++ '[' -f extracted ']'
++ '[' '!' -f hindi-pos-tagger-3.0/hindi.input.txt ']'
++ '[' -f hindi-pos-tagger-3.0/hindi.input.txt ']'
++ '[' '!' -f hindi.output ']'
++ eval 'python3 insert_errors.py hindi.output  --single --edits>hiwiki.augmented.edits'
+++ python3 insert_errors.py hindi.output --single --edits
+Traceback (most recent call last):
+  File "/home/uddeep/NLP_Assignment3/wikiextract/insert_errors.py", line 200, in <module>
+    main(parser_args)
+  File "/home/uddeep/NLP_Assignment3/wikiextract/insert_errors.py", line 176, in main
+    sentence_tagged = pos_tag(sentence)
+                      ^^^^^^^^^^^^^^^^^
+  File "/home/uddeep/NLP_Assignment3/wikiextract/insert_errors.py", line 72, in pos_tag
+    tags.append(components[2])
+                ~~~~~~~~~~^^^
+IndexError: list index out of range
+(Assign_3) uddeep@WIN-7MM1H8MLONC:~/NLP_Assignment3/wikiextract$ code .
+Updating VS Code Server to version f1a4fb101478ce6ec82fe9627c43efbf9e98c813
+Removing previous installation...
+Installing VS Code Server for Linux x64 (f1a4fb101478ce6ec82fe9627c43efbf9e98c813)
+Downloading: 100%
+Unpacking: 100%
+Unpacked 1773 files and folders to /home/uddeep/.vscode-server/bin/f1a4fb101478ce6ec82fe9627c43efbf9e98c813.
+(Assign_3) uddeep@WIN-7MM1H8MLONC:~/NLP_Assignment3/wikiextract$ bash setup.sh
++ '[' '!' -f hiwiki-pages-meta-current.xml ']'
++ '[' '!' -d hindi-pos-tagger-3.0 ']'
+(Assign_3) uddeep@WIN-7MM1H8MLONC:~/NLP_Assignment3/wikiextract$ bash run_hiwiki.sh
++ SEED=42
++ OUTPUT_SENT=1000000
++ HIWIKI_FILE=hiwiki-pages-meta-current.xml
++ EXTRACTED_FILE=extracted
++ EXTRACT_TEXT='python3 WikiExtractor.py --quiet --no_templates --filter_disambig_pages   --min_text_length 20   $HIWIKI_FILE -b 5G -o -'
++ TOKENIZE_SENTENCE='python3 indic_sentence_tokenizer.py'
++ SELECT_RANDOM_SENTENCE='shuf -n $OUTPUT_SENT --random-source=<(get_seeded_random $SEED)'
++ INSERT_ERRORS='python3 insert_errors.py hindi.output  --single --edits'
++ '[' '!' -f extracted ']'
++ echo Testing
+Testing
++ echo 'python3 WikiExtractor.py --quiet --no_templates --filter_disambig_pages   --min_text_length 20   $HIWIKI_FILE -b 5G -o ->extracted'
+python3 WikiExtractor.py --quiet --no_templates --filter_disambig_pages   --min_text_length 20   $HIWIKI_FILE -b 5G -o ->extracted
++ eval 'python3 WikiExtractor.py --quiet --no_templates --filter_disambig_pages   --min_text_length 20   $HIWIKI_FILE -b 5G -o ->extracted'
+++ python3 WikiExtractor.py --quiet --no_templates --filter_disambig_pages --min_text_length 20 hiwiki-pages-meta-current.xml -b 5G -o -
+/home/uddeep/NLP_Assignment3/wikiextract/WikiExtractor.py:78: DeprecationWarning: 'cgi' is deprecated and slated for removal in Python 3.13
+  import cgi
+Traceback (most recent call last):
+  File "/home/uddeep/NLP_Assignment3/wikiextract/WikiExtractor.py", line 2532, in <module>
+    ExtLinkBracketedRegex = re.compile(
+                            ^^^^^^^^^^^
+  File "/home/uddeep/anaconda3/lib/python3.12/re/__init__.py", line 228, in compile
+    return _compile(pattern, flags)
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/uddeep/anaconda3/lib/python3.12/re/__init__.py", line 307, in _compile
+    p = _compiler.compile(pattern, flags)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/uddeep/anaconda3/lib/python3.12/re/_compiler.py", line 745, in compile
+    p = _parser.parse(p, flags)
+        ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/uddeep/anaconda3/lib/python3.12/re/_parser.py", line 979, in parse
+    p = _parse_sub(source, state, flags & SRE_FLAG_VERBOSE, 0)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/uddeep/anaconda3/lib/python3.12/re/_parser.py", line 460, in _parse_sub
+    itemsappend(_parse(source, state, verbose, nested + 1,
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/uddeep/anaconda3/lib/python3.12/re/_parser.py", line 862, in _parse
+    p = _parse_sub(source, state, sub_verbose, nested + 1)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/uddeep/anaconda3/lib/python3.12/re/_parser.py", line 460, in _parse_sub
+    itemsappend(_parse(source, state, verbose, nested + 1,
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/uddeep/anaconda3/lib/python3.12/re/_parser.py", line 862, in _parse
+    p = _parse_sub(source, state, sub_verbose, nested + 1)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/uddeep/anaconda3/lib/python3.12/re/_parser.py", line 460, in _parse_sub
+    itemsappend(_parse(source, state, verbose, nested + 1,
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/uddeep/anaconda3/lib/python3.12/re/_parser.py", line 840, in _parse
+    raise source.error('global flags not at the start '
+re.error: global flags not at the start of the expression at position 4
+(Assign_3) uddeep@WIN-7MM1H8MLONC:~/NLP_Assignment3/wikiextract$ git status
+On branch master
+Your branch is up to date with 'origin/master'.
+
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git restore <file>..." to discard changes in working directory)
+        modified:   .gitignore
+        modified:   run_hiwiki.sh
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+        extracted
+        hiwiki-pages-meta-current.xml
+
+no changes added to commit (use "git add" and/or "git commit -a")
+(Assign_3) uddeep@WIN-7MM1H8MLONC:~/NLP_Assignment3/wikiextract$ cd ..
+(Assign_3) uddeep@WIN-7MM1H8MLONC:~/NLP_Assignment3$ ls
+README.md  wikiextract
+(Assign_3) uddeep@WIN-7MM1H8MLONC:~/NLP_Assignment3$ git reset --hard
+HEAD is now at d4574c9 udating the setup file
+(Assign_3) uddeep@WIN-7MM1H8MLONC:~/NLP_Assignment3$ git status
+On branch master
+Your branch is up to date with 'origin/master'.
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+        wikiextract/hiwiki-pages-meta-current.xml
+
+nothing added to commit but untracked files present (use "git add" to track)
+(Assign_3) uddeep@WIN-7MM1H8MLONC:~/NLP_Assignment3$ git add .
+^C
+(Assign_3) uddeep@WIN-7MM1H8MLONC:~/NLP_Assignment3$ git status
+On branch master
+Your branch is up to date with 'origin/master'.
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+        wikiextract/hiwiki-pages-meta-current.xml
+
+nothing added to commit but untracked files present (use "git add" to track)
+(Assign_3) uddeep@WIN-7MM1H8MLONC:~/NLP_Assignment3$ git reset --hard
+HEAD is now at d4574c9 udating the setup file
+(Assign_3) uddeep@WIN-7MM1H8MLONC:~/NLP_Assignment3$ git pull origin master
+git: 'credential-manager' is not a git command. See 'git --help'.
+From https://github.com/uddeepyalamanchili/NLP_Assignment3
+ * branch            master     -> FETCH_HEAD
+Already up to date.
+(Assign_3) uddeep@WIN-7MM1H8MLONC:~/NLP_Assignment3$ git log
+commit d4574c9a73e23b7bf5a51f433691131dc320f034 (HEAD -> master, origin/master, origin/HEAD)
+Author: uddip yalamanchili <uddeepyalamanchili@gmail.com>
+Date:   Sat Nov 16 17:33:46 2024 -0500
+
+    udating the setup file
+
+commit 6c7030859702e1edf74c90ccd9ec02d138d15816
+Author: uddip yalamanchili <uddeepyalamanchili@gmail.com>
+Date:   Sat Nov 16 16:26:49 2024 -0500
+
+    adding repo code for wikiExtract
+
+commit 238435ba3b6caaa4d03801f9f71688c5a74760ca
+Author: Uddip Yalamanchili <31996502+uddeepyalamanchili@users.noreply.github.com>
+Date:   Sat Nov 16 14:33:27 2024 -0500
+
+    Initial commit
+(Assign_3) uddeep@WIN-7MM1H8MLONC:~/NLP_Assignment3$ git pull origin master
+git: 'credential-manager' is not a git command. See 'git --help'.
+From https://github.com/uddeepyalamanchili/NLP_Assignment3
+ * branch            master     -> FETCH_HEAD
+Already up to date.
+(Assign_3) uddeep@WIN-7MM1H8MLONC:~/NLP_Assignment3$ ls
+README.md  wikiextract
+(Assign_3) uddeep@WIN-7MM1H8MLONC:~/NLP_Assignment3$ cd wikiextract/
+(Assign_3) uddeep@WIN-7MM1H8MLONC:~/NLP_Assignment3/wikiextract$ ls
+HindmonoExtractor.py  WikiExtractor.py   extracted             hindi-pos-tagger.patch       insert_errors.py     run_hiwiki.sh  setup.sh
+README.md             categories.filter  hindi-pos-tagger-3.0  indic_sentence_tokenizer.py  run_hindmonocorp.sh  scripts        shuffle.sh
+(Assign_3) uddeep@WIN-7MM1H8MLONC:~/NLP_Assignment3/wikiextract$ bash setup.sh
++ '[' '!' -f hiwiki-pages-meta-current.xml ']'
++ echo 'DOWNLOADING HIWIKI'
+DOWNLOADING HIWIKI
++ curl -L --fail --remote-name-all https://dumps.wikimedia.org/hiwiki/20240620/hiwiki-20240620-pages-meta-current.xml.bz2 --output hiwiki-pages-meta-current.xml.bz2
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+100  308M  100  308M    0     0  4101k      0  0:01:17  0:01:17 --:--:-- 4219k
++ bzip2 -d hiwiki-pages-meta-current.xml.bz2
++ '[' '!' -d hindi-pos-tagger-3.0 ']'
+(Assign_3) uddeep@WIN-7MM1H8MLONC:~/NLP_Assignment3/wikiextract$ bash run_hiwiki.sh
++ SEED=42
++ OUTPUT_SENT=1000000
++ HIWIKI_FILE=hiwiki-pages-meta-current.xml
++ EXTRACTED_FILE=extracted
++ EXTRACT_TEXT='python3 WikiExtractor.py --quiet --no_templates --filter_disambig_pages   --min_text_length 20   $HIWIKI_FILE -b 5G -o -'
++ TOKENIZE_SENTENCE='python3 indic_sentence_tokenizer.py'
++ SELECT_RANDOM_SENTENCE='shuf -n $OUTPUT_SENT --random-source=<(get_seeded_random $SEED)'
++ INSERT_ERRORS='python3 insert_errors.py hindi.output  --single --edits'
++ '[' '!' -f extracted ']'
++ '[' -f extracted ']'
++ '[' '!' -f hindi-pos-tagger-3.0/hindi.input.txt ']'
++ wc -l extracted
+0 extracted
++ eval 'python3 indic_sentence_tokenizer.py<extracted>tmp.tok'
+++ python3 indic_sentence_tokenizer.py
++ eval shuf -n '$OUTPUT_SENT' '--random-source=<(get_seeded_random' '$SEED)'
+++ shuf -n 1000000 --random-source=/dev/fd/63
++++ get_seeded_random 42
++++ openssl enc -aes-256-ctr -pass pass:42 -nosalt
++ wc -l hindi.input.txt
+0 hindi.input.txt
++ rm tmp.tok
++ mv hindi.input.txt hindi-pos-tagger-3.0/hindi.input.txt
++ '[' -f hindi-pos-tagger-3.0/hindi.input.txt ']'
++ '[' '!' -f hindi.output ']'
++ cd hindi-pos-tagger-3.0
++ make tag
+make: *** No rule to make target 'tag'.  Stop.
+(Assign_3) uddeep@WIN-7MM1H8MLONC:~/NLP_Assignment3/wikiextract$ git status
+On branch master
+Your branch is up to date with 'origin/master'.
+
+nothing to commit, working tree clean
+(Assign_3) uddeep@WIN-7MM1H8MLONC:~/NLP_Assignment3/wikiextract$ bash setup.sh
++ '[' '!' -f hiwiki-pages-meta-current.xml ']'
++ echo 'DOWNLOADING HIWIKI'
+DOWNLOADING HIWIKI
++ curl -L --fail --remote-name-all https://dumps.wikimedia.org/hiwiki/20240620/hiwiki-20240620-pages-meta-current.xml.bz2 --output hiwiki-pages-meta-current.xml.bz2
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+100  308M  100  308M    0     0  4671k      0  0:01:07  0:01:07 --:--:-- 4634k
++ bzip2 -d hiwiki-pages-meta-current.xml.bz2
++ '[' '!' -d hindi-pos-tagger-3.0 ']'
+(Assign_3) uddeep@WIN-7MM1H8MLONC:~/NLP_Assignment3/wikiextract$ rm hindi.output hindi-pos-tagger-3.0/hindi.input.txt
+rm: cannot remove 'hindi.output': No such file or directory
+rm: cannot remove 'hindi-pos-tagger-3.0/hindi.input.txt': No such file or directory
+(Assign_3) uddeep@WIN-7MM1H8MLONC:~/NLP_Assignment3/wikiextract$ ls
+HindmonoExtractor.py  WikiExtractor.py   hindi-pos-tagger-3.0    hiwiki-pages-meta-current.xml  insert_errors.py     run_hiwiki.sh  setup.sh
+README.md             categories.filter  hindi-pos-tagger.patch  indic_sentence_tokenizer.py    run_hindmonocorp.sh  scripts        shuffle.sh
+(Assign_3) uddeep@WIN-7MM1H8MLONC:~/NLP_Assignment3/wikiextract$ rm extracted
+rm: cannot remove 'extracted': No such file or directory
+(Assign_3) uddeep@WIN-7MM1H8MLONC:~/NLP_Assignment3/wikiextract$ bash run_hiwiki.sh
++ SEED=42
++ OUTPUT_SENT=1000000
++ HIWIKI_FILE=hiwiki-pages-meta-current.xml
++ EXTRACTED_FILE=extracted
++ EXTRACT_TEXT='python3 WikiExtractor.py --quiet --no_templates --filter_disambig_pages   --min_text_length 20   $HIWIKI_FILE -b 5G -o -'
++ TOKENIZE_SENTENCE='python3 indic_sentence_tokenizer.py'
++ SELECT_RANDOM_SENTENCE='shuf -n $OUTPUT_SENT --random-source=<(get_seeded_random $SEED)'
++ INSERT_ERRORS='python3 insert_errors.py hindi.output  --single --edits'
++ '[' '!' -f extracted ']'
++ eval 'python3 WikiExtractor.py --quiet --no_templates --filter_disambig_pages   --min_text_length 20   $HIWIKI_FILE -b 5G -o ->extracted'
+++ python3 WikiExtractor.py --quiet --no_templates --filter_disambig_pages --min_text_length 20 hiwiki-pages-meta-current.xml -b 5G -o -
+/home/uddeep/NLP_Assignment3/wikiextract/WikiExtractor.py:78: DeprecationWarning: 'cgi' is deprecated and slated for removal in Python 3.13
+  import cgi
+Traceback (most recent call last):
+  File "/home/uddeep/NLP_Assignment3/wikiextract/WikiExtractor.py", line 2532, in <module>
+    ExtLinkBracketedRegex = re.compile(
+                            ^^^^^^^^^^^
+  File "/home/uddeep/anaconda3/lib/python3.12/re/__init__.py", line 228, in compile
+    return _compile(pattern, flags)
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/uddeep/anaconda3/lib/python3.12/re/__init__.py", line 307, in _compile
+    p = _compiler.compile(pattern, flags)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/uddeep/anaconda3/lib/python3.12/re/_compiler.py", line 745, in compile
+    p = _parser.parse(p, flags)
+        ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/uddeep/anaconda3/lib/python3.12/re/_parser.py", line 979, in parse
+    p = _parse_sub(source, state, flags & SRE_FLAG_VERBOSE, 0)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/uddeep/anaconda3/lib/python3.12/re/_parser.py", line 460, in _parse_sub
+    itemsappend(_parse(source, state, verbose, nested + 1,
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/uddeep/anaconda3/lib/python3.12/re/_parser.py", line 862, in _parse
+    p = _parse_sub(source, state, sub_verbose, nested + 1)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/uddeep/anaconda3/lib/python3.12/re/_parser.py", line 460, in _parse_sub
+    itemsappend(_parse(source, state, verbose, nested + 1,
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/uddeep/anaconda3/lib/python3.12/re/_parser.py", line 862, in _parse
+    p = _parse_sub(source, state, sub_verbose, nested + 1)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/uddeep/anaconda3/lib/python3.12/re/_parser.py", line 460, in _parse_sub
+    itemsappend(_parse(source, state, verbose, nested + 1,
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/uddeep/anaconda3/lib/python3.12/re/_parser.py", line 840, in _parse
+    raise source.error('global flags not at the start '
+re.error: global flags not at the start of the expression at position 4
+(Assign_3) uddeep@WIN-7MM1H8MLONC:~/NLP_Assignment3/wikiextract$ rm hindi.output hindi-pos-tagger-3.0/hindi.input.txt
+rm: cannot remove 'hindi.output': No such file or directory
+rm: cannot remove 'hindi-pos-tagger-3.0/hindi.input.txt': No such file or directory
+(Assign_3) uddeep@WIN-7MM1H8MLONC:~/NLP_Assignment3/wikiextract$ rm extracted
+(Assign_3) uddeep@WIN-7MM1H8MLONC:~/NLP_Assignment3/wikiextract$ bash run_hiwiki.sh
++ SEED=42
++ OUTPUT_SENT=1000000
++ HIWIKI_FILE=hiwiki-pages-meta-current.xml
++ EXTRACTED_FILE=extracted
++ EXTRACT_TEXT='python3 WikiExtractor.py --quiet --no_templates --filter_disambig_pages   --min_text_length 20   $HIWIKI_FILE -b 5G -o -'
++ TOKENIZE_SENTENCE='python3 indic_sentence_tokenizer.py'
++ SELECT_RANDOM_SENTENCE='shuf -n $OUTPUT_SENT --random-source=<(get_seeded_random $SEED)'
++ INSERT_ERRORS='python3 insert_errors.py hindi.output  --single --edits'
++ '[' '!' -f extracted ']'
++ eval 'python3 WikiExtractor.py --quiet --no_templates --filter_disambig_pages   --min_text_length 20   $HIWIKI_FILE -b 5G -o ->extracted'
+++ python3 WikiExtractor.py --quiet --no_templates --filter_disambig_pages --min_text_length 20 hiwiki-pages-meta-current.xml -b 5G -o -
+/home/uddeep/NLP_Assignment3/wikiextract/WikiExtractor.py:78: DeprecationWarning: 'cgi' is deprecated and slated for removal in Python 3.13
+  import cgi
+Traceback (most recent call last):
+  File "/home/uddeep/NLP_Assignment3/wikiextract/WikiExtractor.py", line 2532, in <module>
+    ExtLinkBracketedRegex = re.compile(
+                            ^^^^^^^^^^^
+  File "/home/uddeep/anaconda3/lib/python3.12/re/__init__.py", line 228, in compile
+    return _compile(pattern, flags)
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/uddeep/anaconda3/lib/python3.12/re/__init__.py", line 307, in _compile
+    p = _compiler.compile(pattern, flags)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/uddeep/anaconda3/lib/python3.12/re/_compiler.py", line 745, in compile
+    p = _parser.parse(p, flags)
+        ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/uddeep/anaconda3/lib/python3.12/re/_parser.py", line 979, in parse
+    p = _parse_sub(source, state, flags & SRE_FLAG_VERBOSE, 0)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/uddeep/anaconda3/lib/python3.12/re/_parser.py", line 460, in _parse_sub
+    itemsappend(_parse(source, state, verbose, nested + 1,
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/uddeep/anaconda3/lib/python3.12/re/_parser.py", line 862, in _parse
+    p = _parse_sub(source, state, sub_verbose, nested + 1)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/uddeep/anaconda3/lib/python3.12/re/_parser.py", line 460, in _parse_sub
+    itemsappend(_parse(source, state, verbose, nested + 1,
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/uddeep/anaconda3/lib/python3.12/re/_parser.py", line 862, in _parse
+    p = _parse_sub(source, state, sub_verbose, nested + 1)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/uddeep/anaconda3/lib/python3.12/re/_parser.py", line 460, in _parse_sub
+    itemsappend(_parse(source, state, verbose, nested + 1,
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/uddeep/anaconda3/lib/python3.12/re/_parser.py", line 840, in _parse
+    raise source.error('global flags not at the start '
+re.error: global flags not at the start of the expression at position 4
+(Assign_3) uddeep@WIN-7MM1H8MLONC:~/NLP_Assignment3/wikiextract$ python3 WikiExtractor.py --quiet --no_templates --filter_disambig_pages   --min_text_length 20   hiwiki-pages-meta-current.xml -b 5G -o ->extracted
+/home/uddeep/NLP_Assignment3/wikiextract/WikiExtractor.py:78: DeprecationWarning: 'cgi' is deprecated and slated for removal in Python 3.13
+  import cgi
+Traceback (most recent call last):
+  File "/home/uddeep/NLP_Assignment3/wikiextract/WikiExtractor.py", line 2532, in <module>
+    ExtLinkBracketedRegex = re.compile(
+                            ^^^^^^^^^^^
+  File "/home/uddeep/anaconda3/lib/python3.12/re/__init__.py", line 228, in compile
+    return _compile(pattern, flags)
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/uddeep/anaconda3/lib/python3.12/re/__init__.py", line 307, in _compile
+    p = _compiler.compile(pattern, flags)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/uddeep/anaconda3/lib/python3.12/re/_compiler.py", line 745, in compile
+    p = _parser.parse(p, flags)
+        ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/uddeep/anaconda3/lib/python3.12/re/_parser.py", line 979, in parse
+    p = _parse_sub(source, state, flags & SRE_FLAG_VERBOSE, 0)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/uddeep/anaconda3/lib/python3.12/re/_parser.py", line 460, in _parse_sub
+    itemsappend(_parse(source, state, verbose, nested + 1,
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/uddeep/anaconda3/lib/python3.12/re/_parser.py", line 862, in _parse
+    p = _parse_sub(source, state, sub_verbose, nested + 1)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/uddeep/anaconda3/lib/python3.12/re/_parser.py", line 460, in _parse_sub
+    itemsappend(_parse(source, state, verbose, nested + 1,
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/uddeep/anaconda3/lib/python3.12/re/_parser.py", line 862, in _parse
+    p = _parse_sub(source, state, sub_verbose, nested + 1)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/uddeep/anaconda3/lib/python3.12/re/_parser.py", line 460, in _parse_sub
+    itemsappend(_parse(source, state, verbose, nested + 1,
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/uddeep/anaconda3/lib/python3.12/re/_parser.py", line 840, in _parse
+    raise source.error('global flags not at the start '
+re.error: global flags not at the start of the expression at position 4
+(Assign_3) uddeep@WIN-7MM1H8MLONC:~/NLP_Assignment3/wikiextract$ python2 WikiExtractor.py --quiet --no_templates --filter_disambig_pages   --min_text_length
+ 20   hiwiki-pages-meta-current.xml -b 5G -o ->extracted
+(Assign_3) uddeep@WIN-7MM1H8MLONC:~/NLP_Assignment3/wikiextract$ python3 indic_sentence_tokenizer.py<extracted>tmp.tok
+(Assign_3) uddeep@WIN-7MM1H8MLONC:~/NLP_Assignment3/wikiextract$ man wc
+(Assign_3) uddeep@WIN-7MM1H8MLONC:~/NLP_Assignment3/wikiextract$ rm hindi.output hindi-pos-tagger-3.0/hindi.input.txt
+rm: cannot remove 'hindi.output': No such file or directory
+rm: cannot remove 'hindi-pos-tagger-3.0/hindi.input.txt': No such file or directory
+(Assign_3) uddeep@WIN-7MM1H8MLONC:~/NLP_Assignment3/wikiextract$ rm extracted
+(Assign_3) uddeep@WIN-7MM1H8MLONC:~/NLP_Assignment3/wikiextract$ bash run_hiwiki.sh
++ SEED=42
++ OUTPUT_SENT=1000000
++ HIWIKI_FILE=hiwiki-pages-meta-current.xml
++ EXTRACTED_FILE=extracted
++ EXTRACT_TEXT='python2 WikiExtractor.py --quiet --no_templates --filter_disambig_pages   --min_text_length 20   $HIWIKI_FILE -b 5G -o -'
++ TOKENIZE_SENTENCE='python3 indic_sentence_tokenizer.py'
++ SELECT_RANDOM_SENTENCE='shuf -n $OUTPUT_SENT --random-source=<(get_seeded_random $SEED)'
++ INSERT_ERRORS='python3 insert_errors.py hindi.output  --single --edits'
++ '[' '!' -f extracted ']'
++ eval 'python2 WikiExtractor.py --quiet --no_templates --filter_disambig_pages   --min_text_length 20   $HIWIKI_FILE -b 5G -o ->extracted'
+++ python2 WikiExtractor.py --quiet --no_templates --filter_disambig_pages --min_text_length 20 hiwiki-pages-meta-current.xml -b 5G -o -
++ '[' -f extracted ']'
++ '[' '!' -f hindi-pos-tagger-3.0/hindi.input.txt ']'
++ wc -l extracted
+1701031 extracted
++ eval 'python3 indic_sentence_tokenizer.py<extracted>tmp.tok'
+++ python3 indic_sentence_tokenizer.py
++ eval shuf -n '$OUTPUT_SENT' '--random-source=<(get_seeded_random' '$SEED)'
+++ shuf -n 1000000 --random-source=/dev/fd/63
++++ get_seeded_random 42
++++ openssl enc -aes-256-ctr -pass pass:42 -nosalt
++ wc -l hindi.input.txt
+1000000 hindi.input.txt
++ rm tmp.tok
++ mv hindi.input.txt hindi-pos-tagger-3.0/hindi.input.txt
++ '[' -f hindi-pos-tagger-3.0/hindi.input.txt ']'
++ '[' '!' -f hindi.output ']'
++ cd hindi-pos-tagger-3.0
++ make tag
+make: *** No rule to make target 'tag'.  Stop.
+(Assign_3) uddeep@WIN-7MM1H8MLONC:~/NLP_Assignment3/wikiextract$ man manke
+No manual entry for manke
+(Assign_3) uddeep@WIN-7MM1H8MLONC:~/NLP_Assignment3/wikiextract$ man make
+(Assign_3) uddeep@WIN-7MM1H8MLONC:~/NLP_Assignment3/wikiextract$ make tag
+make: *** No rule to make target 'tag'.  Stop.
+(Assign_3) uddeep@WIN-7MM1H8MLONC:~/NLP_Assignment3/wikiextract$ make tag
+make: *** No rule to make target 'tag'.  Stop.
+(Assign_3) uddeep@WIN-7MM1H8MLONC:~/NLP_Assignment3/wikiextract$ make tage
+make: *** No rule to make target 'tage'.  Stop.
+(Assign_3) uddeep@WIN-7MM1H8MLONC:~/NLP_Assignment3/wikiextract$ make tag
+make: *** No rule to make target 'tag'.  Stop.
+(Assign_3) uddeep@WIN-7MM1H8MLONC:~/NLP_Assignment3/wikiextract$ make tag
+make: *** No rule to make target 'tag'.  Stop.
+(Assign_3) uddeep@WIN-7MM1H8MLONC:~/NLP_Assignment3/wikiextract$ cd ..
+(Assign_3) uddeep@WIN-7MM1H8MLONC:~/NLP_Assignment3$ ls
+README.md  wikiextract
+(Assign_3) uddeep@WIN-7MM1H8MLONC:~/NLP_Assignment3$ git clone https://bitbucket.org/sivareddyg/hindi-part-of-speech-tagger.git
+Cloning into 'hindi-part-of-speech-tagger'...
+remote: Enumerating objects: 44, done.
+remote: Counting objects: 100% (44/44), done.
+remote: Compressing objects: 100% (44/44), done.
+remote: Total 44 (delta 15), reused 0 (delta 0), pack-reused 0 (from 0)
+Receiving objects: 100% (44/44), 10.40 MiB | 3.74 MiB/s, done.
+Resolving deltas: 100% (15/15), done.
+(Assign_3) uddeep@WIN-7MM1H8MLONC:~/NLP_Assignment3$ ls
+README.md  hindi-part-of-speech-tagger  wikiextract
+(Assign_3) uddeep@WIN-7MM1H8MLONC:~/NLP_Assignment3$ man mv
+(Assign_3) uddeep@WIN-7MM1H8MLONC:~/NLP_Assignment3$ mv hindi-part-of-speech-tagger/ ./wikiextract/
+(Assign_3) uddeep@WIN-7MM1H8MLONC:~/NLP_Assignment3$ ls
+README.md  wikiextract
+(Assign_3) uddeep@WIN-7MM1H8MLONC:~/NLP_Assignment3$ cd wikiextract/
+(Assign_3) uddeep@WIN-7MM1H8MLONC:~/NLP_Assignment3/wikiextract$ ls
+HindmonoExtractor.py  categories.filter            hindi-pos-tagger-3.0           indic_sentence_tokenizer.py  run_hiwiki.sh  shuffle.sh
+README.md             extracted                    hindi-pos-tagger.patch         insert_errors.py             scripts
+WikiExtractor.py      hindi-part-of-speech-tagger  hiwiki-pages-meta-current.xml  run_hindmonocorp.sh          setup.sh
+(Assign_3) uddeep@WIN-7MM1H8MLONC:~/NLP_Assignment3/wikiextract$ cd hindi-p
+-bash: cd: hindi-p: No such file or directory
+(Assign_3) uddeep@WIN-7MM1H8MLONC:~/NLP_Assignment3/wikiextract$ cd hindi-part-of-speech-tagger/
+(Assign_3) uddeep@WIN-7MM1H8MLONC:~/NLP_Assignment3/wikiextract/hindi-part-of-speech-tagger$ cd ..
+(Assign_3) uddeep@WIN-7MM1H8MLONC:~/NLP_Assignment3/wikiextract$ bash run_hiwiki.sh
++ SEED=42
++ OUTPUT_SENT=1000000
++ HIWIKI_FILE=hiwiki-pages-meta-current.xml
++ EXTRACTED_FILE=extracted
++ EXTRACT_TEXT='python2 WikiExtractor.py --quiet --no_templates --filter_disambig_pages   --min_text_length 20   $HIWIKI_FILE -b 5G -o -'
++ TOKENIZE_SENTENCE='python3 indic_sentence_tokenizer.py'
++ SELECT_RANDOM_SENTENCE='shuf -n $OUTPUT_SENT --random-source=<(get_seeded_random $SEED)'
++ INSERT_ERRORS='python3 insert_errors.py hindi.output  --single --edits'
++ '[' '!' -f extracted ']'
++ '[' -f extracted ']'
++ '[' '!' -f hindi-pos-tagger-3.0/hindi.input.txt ']'
++ '[' -f hindi-pos-tagger-3.0/hindi.input.txt ']'
++ '[' '!' -f hindi.output ']'
++ cd hindi-part-of-speech-tagger
++ make tag
+cat hindi.input.txt | ./bin/unitok.py -l hindi -n | sed -e 's/।/./g' | sed -e 's/^\.$/.\n<\/s>\n<s>/g' |  ./bin/normalize_vert.py  > hindi.tmp.words
+./bin/tnt -v0 -H models/hindi   hindi.tmp.words | sed -e 's/\t\+/\t/g' | ./bin/lemmatiser.py models/hindi.lemma | ./bin/tag2vert.py > hindi.output
+rm hindi.tmp.words
+echo "Output stored in hindi.output"
+Output stored in hindi.output
++ wc -l hindi.output
+591 hindi.output
++ cd ..
++ mv hindi-part-of-speech-tagger/hindi.output hindi.output
++ eval 'python3 insert_errors.py hindi.output  --single --edits>hiwiki.augmented.edits'
+++ python3 insert_errors.py hindi.output --single --edits
+(Assign_3) uddeep@WIN-7MM1H8MLONC:~/NLP_Assignment3/wikiextract$ ls
+HindmonoExtractor.py  categories.filter            hindi-pos-tagger-3.0           hiwiki.augmented.edits       run_hindmonocorp.sh  setup.sh
+README.md             extracted                    hindi-pos-tagger.patch         indic_sentence_tokenizer.py  run_hiwiki.sh        shuffle.sh
+WikiExtractor.py      hindi-part-of-speech-tagger  hiwiki-pages-meta-current.xml  insert_errors.py             scripts
+(Assign_3) uddeep@WIN-7MM1H8MLONC:~/NLP_Assignment3/wikiextract$ cd hindi-pos-tagger-3.0/
+(Assign_3) uddeep@WIN-7MM1H8MLONC:~/NLP_Assignment3/wikiextract/hindi-pos-tagger-3.0$ ls
+bin  hindi.input.txt  models
+(Assign_3) uddeep@WIN-7MM1H8MLONC:~/NLP_Assignment3/wikiextract/hindi-pos-tagger-3.0$ man mv
+(Assign_3) uddeep@WIN-7MM1H8MLONC:~/NLP_Assignment3/wikiextract/hindi-pos-tagger-3.0$ mv hindi.input.txt ../../hindi.input.txt
+(Assign_3) uddeep@WIN-7MM1H8MLONC:~/NLP_Assignment3/wikiextract/hindi-pos-tagger-3.0$ ls
+bin  models
+(Assign_3) uddeep@WIN-7MM1H8MLONC:~/NLP_Assignment3/wikiextract/hindi-pos-tagger-3.0$ cd ..
+(Assign_3) uddeep@WIN-7MM1H8MLONC:/tmp$ l
+remote-wsl-loc.txt                                                                 tmp-2466-wpvesYAoYXAo/    vscode-distro-env.HhHnMI
+snap-private-tmp/                                                                  vscode-distro-env.0eFGBj  vscode-distro-env.ZWJHMY
+systemd-private-d8f83eea096d4a4d96e9aa5b2bfa9525-systemd-logind.service-57A5Ai/    vscode-distro-env.1c6Azc  vscode-distro-env.xi18cs
+systemd-private-d8f83eea096d4a4d96e9aa5b2bfa9525-systemd-resolved.service-O3JkFP/  vscode-distro-env.5ScXBu  vscode-typescript1000/
+(Assign_3) uddeep@WIN-7MM1H8MLONC:/tmp$ spwd
+Command 'spwd' not found, did you mean:
+  command 'hpwd' from deb hfsutils (3.2.6-15build2)
+  command 'spd' from deb spd (1.3.0-1ubuntu3)
+  command 'spfd' from deb spf-tools-perl (2.9.0-5)
+  command 'spfd' from deb spfquery (1.2.10-7.1ubuntu1)
+  command 'spmd' from deb pvm-examples (3.4.6-3.2)
+  command 'pwd' from deb coreutils (8.32-4.1ubuntu1.2)
+Try: sudo apt install <deb name>
+(Assign_3) uddeep@WIN-7MM1H8MLONC:/tmp$ pwd
+/tmp
+(Assign_3) uddeep@WIN-7MM1H8MLONC:/tmp$ cd
+(Assign_3) uddeep@WIN-7MM1H8MLONC:~$ ls
+Anaconda3-2024.06-1-Linux-x86_64.sh  Keypair  NLP_Assignment3  auto    leetcode  spring_crud_app       test.py
+Gentopia-Mason                       NLP      anaconda3        cs_550  snap      spring_crud_app.wiki  testing
+(Assign_3) uddeep@WIN-7MM1H8MLONC:~$ cd NLP_Assignment3/
+(Assign_3) uddeep@WIN-7MM1H8MLONC:~/NLP_Assignment3$ ls
+README.md  hindi-pos-tagger-3.0  hindi-pos-tagger-3.0.tgz  hindi.input.txt  wikiextract
+(Assign_3) uddeep@WIN-7MM1H8MLONC:~/NLP_Assignment3$ cd wikiextract/
+(Assign_3) uddeep@WIN-7MM1H8MLONC:~/NLP_Assignment3/wikiextract$ ls
+HindmonoExtractor.py  categories.filter       hiwiki-pages-meta-current.xml  insert_errors.py     scripts
+README.md             extracted               hiwiki.augmented.edits         run_hindmonocorp.sh  setup.sh
+WikiExtractor.py      hindi-pos-tagger.patch  indic_sentence_tokenizer.py    run_hiwiki.sh        shuffle.sh
+(Assign_3) uddeep@WIN-7MM1H8MLONC:~/NLP_Assignment3/wikiextract$ ls -al
+total 3267764
+drwxr-xr-x 3 uddeep uddeep       4096 Nov 17 14:36 .
+drwxr-xr-x 5 uddeep uddeep       4096 Nov 17 14:38 ..
+-rw-r--r-- 1 uddeep uddeep        543 Nov 17 11:47 .gitignore
+-rw-r--r-- 1 uddeep uddeep        120 Nov 16 16:24 HindmonoExtractor.py
+-rw-r--r-- 1 uddeep uddeep       1407 Nov 16 16:24 README.md
+-rw-r--r-- 1 uddeep uddeep     120825 Nov 16 20:03 WikiExtractor.py
+-rw-r--r-- 1 uddeep uddeep     968029 Nov 16 16:24 categories.filter
+-rw-r--r-- 1 uddeep uddeep  542539274 Nov 17 14:05 extracted
+-rw-r--r-- 1 uddeep uddeep       3285 Nov 16 16:24 hindi-pos-tagger.patch
+-rw-r--r-- 1 uddeep uddeep 2802429626 Nov 17 11:49 hiwiki-pages-meta-current.xml
+-rw-r--r-- 1 uddeep uddeep      56539 Nov 17 14:27 hiwiki.augmented.edits
+-rw-r--r-- 1 uddeep uddeep       3551 Nov 16 16:24 indic_sentence_tokenizer.py
+-rw-r--r-- 1 uddeep uddeep       9332 Nov 16 20:04 insert_errors.py
+-rw-r--r-- 1 uddeep uddeep        466 Nov 16 16:25 run_hindmonocorp.sh
+-rw-r--r-- 1 uddeep uddeep       1370 Nov 17 14:32 run_hiwiki.sh
+drwxr-xr-x 2 uddeep uddeep       4096 Nov 16 16:24 scripts
+-rw-r--r-- 1 uddeep uddeep        765 Nov 16 17:33 setup.sh
+-rw-r--r-- 1 uddeep uddeep        287 Nov 16 16:24 shuffle.sh
+(Assign_3) uddeep@WIN-7MM1H8MLONC:~/NLP_Assignment3/wikiextract$ chmod 777 setup.sh
+(Assign_3) uddeep@WIN-7MM1H8MLONC:~/NLP_Assignment3/wikiextract$ ls
+HindmonoExtractor.py  categories.filter       hiwiki-pages-meta-current.xml  insert_errors.py     scripts
+README.md             extracted               hiwiki.augmented.edits         run_hindmonocorp.sh  setup.sh
+WikiExtractor.py      hindi-pos-tagger.patch  indic_sentence_tokenizer.py    run_hiwiki.sh        shuffle.sh
+(Assign_3) uddeep@WIN-7MM1H8MLONC:~/NLP_Assignment3/wikiextract$ bash setup.sh
++ '[' '!' -f hiwiki-pages-meta-current.xml ']'
++ '[' '!' -d hindi-pos-tagger-3.0 ']'
++ curl -L --fail https://bitbucket.org/sivareddyg/hindi-part-of-speech-tagger/downloads/hindi-pos-tagger-3.0.tgz --output hindi-pos-tagger-3.0.tgz
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+100 10.6M  100 10.6M    0     0  5669k      0  0:00:01  0:00:01 --:--:-- 6192k
++ tar xvf hindi-pos-tagger-3.0.tgz
+hindi-pos-tagger-3.0/
+hindi-pos-tagger-3.0/README.md
+hindi-pos-tagger-3.0/posguidelines.pdf
+hindi-pos-tagger-3.0/version.md
+hindi-pos-tagger-3.0/Makefile
+hindi-pos-tagger-3.0/bin/
+hindi-pos-tagger-3.0/bin/unitok.py
+hindi-pos-tagger-3.0/bin/lemmatiser.py
+hindi-pos-tagger-3.0/bin/tnt
+hindi-pos-tagger-3.0/bin/normalize_bojar_lrec_2010.pyc
+hindi-pos-tagger-3.0/bin/normalize_vert.py
+hindi-pos-tagger-3.0/bin/tnt-para
+hindi-pos-tagger-3.0/bin/tag2vert.py
+hindi-pos-tagger-3.0/bin/normalize_bojar_lrec_2010.py
+hindi-pos-tagger-3.0/bin/tnt-diff
+hindi-pos-tagger-3.0/bin/tnt-wc
+hindi-pos-tagger-3.0/models/
+hindi-pos-tagger-3.0/models/modifyLex.py
+hindi-pos-tagger-3.0/models/hindi.lemma
+hindi-pos-tagger-3.0/models/hindi.123
+hindi-pos-tagger-3.0/models/hindi.lex
+hindi-pos-tagger-3.0/models/modifyLemma.py
+hindi-pos-tagger-3.0/hindi.sample.out.txt
+hindi-pos-tagger-3.0/hindi.sample.out.pdf
+hindi-pos-tagger-3.0/hindi.input.txt
++ rm hindi-pos-tagger-3.0.tgz
++ patch -p0
+patching file hindi-pos-tagger-3.0/bin/lemmatiser.py
+patching file hindi-pos-tagger-3.0/bin/normalize_bojar_lrec_2010.py
+patching file hindi-pos-tagger-3.0/bin/normalize_vert.py
+patching file hindi-pos-tagger-3.0/bin/tag2vert.py
+patching file hindi-pos-tagger-3.0/bin/unitok.py
+patching file hindi-pos-tagger-3.0/Makefile
++ rm hindi-pos-tagger-3.0/hindi.input.txt
+(Assign_3) uddeep@WIN-7MM1H8MLONC:~/NLP_Assignment3/wikiextract$ ls
+HindmonoExtractor.py  categories.filter     hindi-pos-tagger.patch         indic_sentence_tokenizer.py  run_hiwiki.sh  shuffle.sh
+README.md             extracted             hiwiki-pages-meta-current.xml  insert_errors.py             scripts
+WikiExtractor.py      hindi-pos-tagger-3.0  hiwiki.augmented.edits         run_hindmonocorp.sh          setup.sh
+(Assign_3) uddeep@WIN-7MM1H8MLONC:~/NLP_Assignment3/wikiextract$ cd hindi-pos-tagger-3.0/
+(Assign_3) uddeep@WIN-7MM1H8MLONC:~/NLP_Assignment3/wikiextract/hindi-pos-tagger-3.0$ ls
+Makefile  README.md  bin  hindi.sample.out.pdf  hindi.sample.out.txt  models  posguidelines.pdf  version.md
+(Assign_3) uddeep@WIN-7MM1H8MLONC:~/NLP_Assignment3/wikiextract/hindi-pos-tagger-3.0$ cd ..
+(Assign_3) uddeep@WIN-7MM1H8MLONC:~/NLP_Assignment3/wikiextract$ l
+HindmonoExtractor.py  categories.filter      hindi-pos-tagger.patch         indic_sentence_tokenizer.py  run_hiwiki.sh  shuffle.sh
+README.md             extracted              hiwiki-pages-meta-current.xml  insert_errors.py             scripts/
+WikiExtractor.py      hindi-pos-tagger-3.0/  hiwiki.augmented.edits         run_hindmonocorp.sh          setup.sh*
+(Assign_3) uddeep@WIN-7MM1H8MLONC:~/NLP_Assignment3/wikiextract$ ls
+HindmonoExtractor.py  categories.filter     hindi-pos-tagger.patch         indic_sentence_tokenizer.py  run_hiwiki.sh  shuffle.sh
+README.md             extracted             hiwiki-pages-meta-current.xml  insert_errors.py             scripts
+WikiExtractor.py      hindi-pos-tagger-3.0  hiwiki.augmented.edits         run_hindmonocorp.sh          setup.sh
+(Assign_3) uddeep@WIN-7MM1H8MLONC:~/NLP_Assignment3/wikiextract$ ls -al
+total 3267768
+drwxr-xr-x 4 uddeep uddeep       4096 Nov 17 14:40 .
+drwxr-xr-x 5 uddeep uddeep       4096 Nov 17 14:38 ..
+-rw-r--r-- 1 uddeep uddeep        543 Nov 17 11:47 .gitignore
+-rw-r--r-- 1 uddeep uddeep        120 Nov 16 16:24 HindmonoExtractor.py
+-rw-r--r-- 1 uddeep uddeep       1407 Nov 16 16:24 README.md
+-rw-r--r-- 1 uddeep uddeep     120825 Nov 16 20:03 WikiExtractor.py
+-rw-r--r-- 1 uddeep uddeep     968029 Nov 16 16:24 categories.filter
+-rw-r--r-- 1 uddeep uddeep  542539274 Nov 17 14:05 extracted
+drwxr-xr-x 4 uddeep uddeep       4096 Nov 17 14:40 hindi-pos-tagger-3.0
+-rw-r--r-- 1 uddeep uddeep       3285 Nov 16 16:24 hindi-pos-tagger.patch
+-rw-r--r-- 1 uddeep uddeep 2802429626 Nov 17 11:49 hiwiki-pages-meta-current.xml
+-rw-r--r-- 1 uddeep uddeep      56539 Nov 17 14:27 hiwiki.augmented.edits
+-rw-r--r-- 1 uddeep uddeep       3551 Nov 16 16:24 indic_sentence_tokenizer.py
+-rw-r--r-- 1 uddeep uddeep       9332 Nov 16 20:04 insert_errors.py
+-rw-r--r-- 1 uddeep uddeep        466 Nov 16 16:25 run_hindmonocorp.sh
+-rw-r--r-- 1 uddeep uddeep       1370 Nov 17 14:32 run_hiwiki.sh
+drwxr-xr-x 2 uddeep uddeep       4096 Nov 16 16:24 scripts
+-rwxrwxrwx 1 uddeep uddeep        765 Nov 16 17:33 setup.sh
+-rw-r--r-- 1 uddeep uddeep        287 Nov 16 16:24 shuffle.sh
+(Assign_3) uddeep@WIN-7MM1H8MLONC:~/NLP_Assignment3/wikiextract$ chmod 777 run_hiwiki.sh
+(Assign_3) uddeep@WIN-7MM1H8MLONC:~/NLP_Assignment3/wikiextract$ ls
+HindmonoExtractor.py  categories.filter     hindi-pos-tagger.patch         indic_sentence_tokenizer.py  run_hiwiki.sh  shuffle.sh
+README.md             extracted             hiwiki-pages-meta-current.xml  insert_errors.py             scripts
+WikiExtractor.py      hindi-pos-tagger-3.0  hiwiki.augmented.edits         run_hindmonocorp.sh          setup.sh
+(Assign_3) uddeep@WIN-7MM1H8MLONC:~/NLP_Assignment3/wikiextract$ ls -al
+total 3267768
+drwxr-xr-x 4 uddeep uddeep       4096 Nov 17 14:40 .
+drwxr-xr-x 5 uddeep uddeep       4096 Nov 17 14:38 ..
+-rw-r--r-- 1 uddeep uddeep        543 Nov 17 11:47 .gitignore
+-rw-r--r-- 1 uddeep uddeep        120 Nov 16 16:24 HindmonoExtractor.py
+-rw-r--r-- 1 uddeep uddeep       1407 Nov 16 16:24 README.md
+-rw-r--r-- 1 uddeep uddeep     120825 Nov 16 20:03 WikiExtractor.py
+-rw-r--r-- 1 uddeep uddeep     968029 Nov 16 16:24 categories.filter
+-rw-r--r-- 1 uddeep uddeep  542539274 Nov 17 14:05 extracted
+drwxr-xr-x 4 uddeep uddeep       4096 Nov 17 14:40 hindi-pos-tagger-3.0
+-rw-r--r-- 1 uddeep uddeep       3285 Nov 16 16:24 hindi-pos-tagger.patch
+-rw-r--r-- 1 uddeep uddeep 2802429626 Nov 17 11:49 hiwiki-pages-meta-current.xml
+-rw-r--r-- 1 uddeep uddeep      56539 Nov 17 14:27 hiwiki.augmented.edits
+-rw-r--r-- 1 uddeep uddeep       3551 Nov 16 16:24 indic_sentence_tokenizer.py
+-rw-r--r-- 1 uddeep uddeep       9332 Nov 16 20:04 insert_errors.py
+-rw-r--r-- 1 uddeep uddeep        466 Nov 16 16:25 run_hindmonocorp.sh
+-rwxrwxrwx 1 uddeep uddeep       1370 Nov 17 14:32 run_hiwiki.sh
+drwxr-xr-x 2 uddeep uddeep       4096 Nov 16 16:24 scripts
+-rwxrwxrwx 1 uddeep uddeep        765 Nov 16 17:33 setup.sh
+-rw-r--r-- 1 uddeep uddeep        287 Nov 16 16:24 shuffle.sh
+(Assign_3) uddeep@WIN-7MM1H8MLONC:~/NLP_Assignment3/wikiextract$ bash run_hiwiki.sh
++ SEED=42
++ OUTPUT_SENT=1000000
++ HIWIKI_FILE=hiwiki-pages-meta-current.xml
++ EXTRACTED_FILE=extracted
++ EXTRACT_TEXT='python2 WikiExtractor.py --quiet --no_templates --filter_disambig_pages   --min_text_length 20   $HIWIKI_FILE -b 5G -o -'
++ TOKENIZE_SENTENCE='python3 indic_sentence_tokenizer.py'
++ SELECT_RANDOM_SENTENCE='shuf -n $OUTPUT_SENT --random-source=<(get_seeded_random $SEED)'
++ INSERT_ERRORS='python3 insert_errors.py hindi.output  --single --edits'
++ '[' '!' -f extracted ']'
++ '[' -f extracted ']'
++ '[' '!' -f hindi-pos-tagger-3.0/hindi.input.txt ']'
++ wc -l extracted
+1701031 extracted
++ eval 'python3 indic_sentence_tokenizer.py<extracted>tmp.tok'
+++ python3 indic_sentence_tokenizer.py
++ eval shuf -n '$OUTPUT_SENT' '--random-source=<(get_seeded_random' '$SEED)'
+++ shuf -n 1000000 --random-source=/dev/fd/63
++++ get_seeded_random 42
++++ openssl enc -aes-256-ctr -pass pass:42 -nosalt
++ wc -l hindi.input.txt
+1000000 hindi.input.txt
++ rm tmp.tok
++ mv hindi.input.txt hindi-pos-tagger-3.0/hindi.input.txt
++ '[' -f hindi-pos-tagger-3.0/hindi.input.txt ']'
++ '[' '!' -f hindi.output ']'
++ cd hindi-pos-tagger-3.0
++ make tag
+chmod +x bin/*
+cat hindi.input.txt | python2 bin/unitok.py -l hindi -n | sed -e 's/^\.$/.\n<\/s>\n<s>/g' |  python2 bin/normalize_vert.py  > hindi.tmp.words
+./bin/tnt -v0 -H models/hindi   hindi.tmp.words | sed -e 's/\t\+/\t/g' | python2 ./bin/lemmatiser.py models/hindi.lemma | python2 bin/tag2vert.py > hindi.output
+rm hindi.tmp.words
+echo "Output stored in hindi.output"
+Output stored in hindi.output
++ wc -l hindi.output
+18266365 hindi.output
++ cd ..
++ mv hindi-pos-tagger-3.0/hindi.output hindi.output
++ eval 'python3 insert_errors.py hindi.output  --single --edits>hiwiki.augmented.edits'
+++ python3 insert_errors.py hindi.output --single --edits
+(Assign_3) uddeep@WIN-7MM1H8MLONC:~/NLP_Assignment3/wikiextract$ head -4000 hiwiki.augmented.edits|python scripts/convert_to_wdiff.py|shuf -n 40
+यह अलकनन्दा नदी [-के-] {+की+} एक मुख्य उपनदी है , जो स्वयं गंगा नदी की एक स्रोतधारा है .
+उत्तरी ज़ांज़ीबार के नुन्ग्वी [-की-] {+के+} बीच पर .
+भूमि से उसे मारने का अनुरोध किया गया [-थी-] {+था+} .
+प्रात काल में शिव पिण्ड को प्राकृतिक रूप से स्नान कराकर उस पर घी लेपन किया [-जातीं-] {+जाता+} है .
+बाद में इलाज के लिए उन्हें ब्रिटेन ले जाया गया जहां डॉक्टरों [-की-] {+के+} अथक प्रयासों के बाद उन्हें बचा लिया गया .
+रवीन्द्र नाथ महतो भारत [-का-] {+के+} झारखण्ड राज्य की नाला सीट से झारखण्ड मुक्ति मोर्चा के विधायक हैं .
+इस समय तक अफ़ग़ानिस्तान में अफ़ग़ान सेना का भी गठन हो [-चुकीं-] {+चुका+} था .
+जब तक आप उसकी पूजा करते हैं , हम [-आपकी-] {+आपका+} समर्थन करेगे और इस्लामी सिद्धांत सार्वभौमिक हैं .
+कुछ वर्ष तक यह वंग में राज्य [-करती-] {+करता+} रहा .
+1627 में अपने पिता की मृत्यु होने [-का-] {+के+} बाद वह गद्दी पर बैठे .
+2011 में हुई भारत की जनगणना के अनुसार इस तहसील में 326 गांव [-है-] {+हैं+} .
+उसने अपने विश्वास और शरीयत [-का-] {+की+} रक्षा की .
+चमड़े या बांस की बनी हुई पनसुइया से शायद लोगों का लकड़ी के ढांचे पर कोई आवरण चढ़ाकर नाव बनाने का विचार उत्पन्न [-हुए-] {+हुआ+} .
+यहां से अनुप्रस्थ बृहदांत्र प्रारंभ होता है और दाहिनी ओर से बाईं प्लीहा तक फैला रहता [-हैं-] {+है+} .
+भेलसंहिता संस्कृत में रचित आयुर्वेद [-के-] {+का+} ग्रन्थ है .
+इसीलिए यह " एकाक्ष " भी [-कही-] {+कहे+} जाते थे .
+[-इसका-] {+इसकी+} सीमा पूर्व और दक्षिण में ब्राजील और पश्चिम में सूरीनाम से लगती है .
+उस समय राजसमंद जिले के वारजाल गांव निवासी नगेसिंह , जो रावत राजपूत थे , अपने परिजनों [-का-] {+के+} साथ बसे थे .
+शाही महल मूल रूप से दत्तराय क्षेत्र में स्थित था और बाद में इसे भक्तपुर दरबार क्षेत्र में लाया गया [-थी-] {+था+} .
+सौभाग्यतः दंडी द्वारा उल्लिखित सेतुबंध काव्य अब भी उपलब्ध है और प्राकृत की एक उत्कृष्ट रचना [-माने-] {+माना+} जाता है .
+१२१७ ग्रेगोरी कैलंडर [-की-] {+का+} एक साधारण वर्ष है .
+बैरगाछी में भारत के बिहार राज्य के अन्तर्गत पुर्णिया मण्डल [-का-] {+के+} अररिया जिले का एक गांव है .
+उन्होंने अर्नेस्ट हेमिंग्वे के " द ओल्ड मैन और सी का भी " गुजराती में अनुवाद [-किए-] {+किया+} .
+इसके अलावा , कई भारतीय ब्लॉगर्स ने हमलों की लाइव टेक्स्ट कवरेज [-का-] {+की+} पेशकश की .
+तब से ओम और शांति [-अच्छी-] {+अच्छे+} दोस्त बन जाते हैं .
+अपने शावकों से युक्त सिंहनी दूसरी सिंहनी के शावकों के लिए भी सहिष्णु होती है , जबकि शावक रहित सिंहनी सहिष्णु नहीं [-होते-] {+होती+} है .
+[-इसका-] {+इसके+} निर्माण के बाद जब इसे इंकूबेटर से आयात किया गया तो इसमें कुल 2 , 802 लेख थे .
+जुलाई १९७७ में यूएनपी ने चुनाव जीता और जयवर्धने देश के प्रधानमंत्री चुने [-गई-] {+गए+} .
+जनसंख्या का 85 94 ग्रामीण निवासी हैं , जबकि 14 0 6 शहरी क्षेत्रों में रहते [-है-] {+हैं+} .
+इस प्रकार संघवाद के सिद्धांत के अनुसार प्रत्येक संघांतरित राज्य का समान प्रतिनिधित्व आवश्यक [-थी-] {+था+} .
+नलियों को आमतौर पर 6 3 मीटर [-के-] {+की+} लंबाई में खरीदा जाता है और फिर कुछ विशिष्ट आकारों में काटा जा सकता है .
+स्वयं कैथोलिक [-होता-] {+होते+} हुए भी उसने उसकी परवाह नहीं की .
+तथा बांग्लादेश के किसी भी अन्य क्षेत्र की तरह ही , यहां की भी प्रमुख मौखिक भाषा और मातृभाषा बांग्ला [-हैं-] {+है+} .
+तत्कालीन रक्षा मंत्री मनोहर पर्रिकर [-का-] {+की+} उपस्थिति में पनडुब्बी 6 अप्रैल 2015 को अनडॉक किया गया था .
+देवबंदी मदरसा में , शेख अल हदीस की स्थिति , या साहिह बुखारी [-की-] {+के+} निवासी प्रोफेसर , को बहुत सम्मान में रखा जाता है .
+अल्फ़ा लीब्राए और बीटा लीब्राए संस्कृत में विशाख नामक नक्षत्र कहलाते [-है-] {+हैं+} .
+1946 [-का-] {+की+} शुरुआत में प्रांतीय विधान मंडलों के लिए नए सिरे से चुनाव कराए गए .
+बद्र की लड़ाई के बाद काब द्वारा भेजा गया एक पत्र मक्का [-पहुंची-] {+पहुंचा+} और मुहम्मद के खिलाफ कुरैश को उकसाया .
+नाशी लोगों में हिन्दुओं और बौद्धों की तरह मृतों का अग्निदाह [-करना-] {+करने+} का रिवाज है .
+सिद्धसेन दिवाकर , जैन दर्शन में न्यायशैली के आद्य उद्भावक [-है-] {+हैं+} .
+(Assign_3) uddeep@WIN-7MM1H8MLONC:~/NLP_Assignment3/wikiextract$ wc hiwiki.augmented.edits
+   7823271   92223762 1128008911 hiwiki.augmented.edits
+(Assign_3) uddeep@WIN-7MM1H8MLONC:~/NLP_Assignment3/wikiextract$
