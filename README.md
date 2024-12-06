@@ -1,3 +1,28 @@
+## **Steps to Run Python and Jupyter Files**
+
+### **1. Clone the Repository**
+```bash
+git clone https://github.com/uddeepyalamanchili/NLP_Project.git
+```
+
+### **2. Install the required dependencies**
+
+Run below line to set up the necessary dependencies and packages.
+
+```
+pip install -r requirements.txt
+```
+
+### **3. Run the corresponding Python or Jupyter file to train and evaluate the model**
+
+To run a Python file, use:
+
+```
+python fileName.py
+```
+
+--------------------------------------------------------------------------------
+
 ## **Steps to Run Wiki Extract**
 
 ### **1. Clone the Repository**
@@ -104,27 +129,3 @@ Usage:
 
 4. Open the notebook and execute the cells.
 
-
-
-## **Steps to Run Python and Jupyter Files**
-
-### **1. Clone the Repository**
-```bash
-git clone https://github.com/uddeepyalamanchili/NLP_Project.git
-```
-
-### **2. Install the required dependencies**
-
-Run below line to set up the necessary dependencies and packages.
-
-```
-pip install -r requirements.txt
-```
-
-### **3. Run the corresponding Python or Jupyter file to train and evaluate the model**
-
-To run a Python file, use:
-
-```
-python fileName.py
-```
