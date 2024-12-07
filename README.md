@@ -1,7 +1,7 @@
 ## **Steps to Run Python and Jupyter Files**
 
 ### **1. Clone the Repository**
-```bash
+```
 git clone https://github.com/uddeepyalamanchili/NLP_Project.git
 ```
 
@@ -26,7 +26,7 @@ python fileName.py
 ## **Steps to Run Wiki Extract**
 
 ### **1. Clone the Repository**
-```bash
+```
 git clone https://github.com/s-ankur/wikiextract
 cd wikiextract
 ```
@@ -129,3 +129,4 @@ Usage:
 
 4. Open the notebook and execute the cells.
 
+Please find the link for datasets [here](https://gmuedu-my.sharepoint.com/:f:/g/personal/uyalaman_gmu_edu/El9MKJSpVBtGutpSgO0OHxAB6IN_FFDzzj_mI7uipYpyLQ?e=dHs31D)
